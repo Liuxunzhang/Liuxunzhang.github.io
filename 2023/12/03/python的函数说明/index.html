@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="此篇介绍了函数的参数、函数的作用域、闭包、函数的装饰器、迭代器、推导式、生成器、匿名函数、内置函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python的函数说明">
+<meta property="og:url" content="http://zhoumuyun.com/2023/12/03/python%E7%9A%84%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E/index.html">
+<meta property="og:site_name" content="Error">
+<meta property="og:description" content="此篇介绍了函数的参数、函数的作用域、闭包、函数的装饰器、迭代器、推导式、生成器、匿名函数、内置函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-03T08:22:58.000Z">
+<meta property="article:modified_time" content="2023-12-03T08:24:12.746Z">
+<meta property="article:author" content="Zhou muyun">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhoumuyun.com/2023/12/03/python%E7%9A%84%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python的函数说明 | Error</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://Liuxunzhang/Liuxunzhang.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Error</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2023/12/03/python%E7%9A%84%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Zhou muyun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Error">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python的函数说明
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-03 16:22:58 / 修改时间：16:24:12" itemprop="dateCreated datePublished" datetime="2023-12-03T16:22:58+08:00">2023-12-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">python笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>此篇介绍了函数的参数、函数的作用域、闭包、函数的装饰器、迭代器、推导式、生成器、匿名函数、内置函数</p>
+<span id="more"></span>
+
+<h2 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h2><h3 id="列表传入函数有对应的方法"><a href="#列表传入函数有对应的方法" class="headerlink" title="列表传入函数有对应的方法"></a>列表传入函数有对应的方法</h3><p>*<strong>arg表示传递任何参数</strong>   <strong>**kwarg传递任何字典参数</strong></p>
+<p><strong>*,**\表示接受所有参数，打包成元组和字典</strong></p>
+<p><strong>*args一定是一个元组，**kwargs一定是一个字典</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stu_list = [<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;4&quot;</span>,<span class="string">&quot;5&quot;</span>,<span class="string">&quot;6&quot;</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">*arg</span>):<span class="comment">#*代表传递任何参数</span></span><br><span class="line">    <span class="built_in">print</span>(arg)</span><br><span class="line">func(*stu_list)<span class="comment">#*在实参位置，把列表打成位置参数进行传递，但是很不常见</span></span><br><span class="line">               <span class="comment">#**在实参位置，可以把字典自动转化为关键字参数进行传递</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="关于return"><a href="#关于return" class="headerlink" title="关于return"></a>关于return</h3><p><strong>返回值</strong>：函数执行之后，会给调用方一个结果，这个结果就是返回值</p>
+<p>1，如果函数内没有return，此时外界收到的None</p>
+<p>2，函数只要执行到了return，函数就会<strong>立即</strong>停止并返回内容，函数内的return的后续代码不会执行</p>
+<p>3，如果写了return</p>
+<p>​	只写了return，后面不跟数据，此时收到的依然是None</p>
+<p>​	return 值，此时表示函数有一个返回值，外界能够接收到一个数据</p>
+<p>​	return 值1，值2，值3…..，此时函数有多个返回值，外界收到的是一个元组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">123</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="comment">#会让程序停止，后续代码不会继续执行，类似循环里面的break</span></span><br><span class="line">	<span class="built_in">print</span>（<span class="number">456</span>）</span><br><span class="line">ret = func()</span><br><span class="line"><span class="built_in">print</span>(ret)<span class="comment">#这里的函数代码指挥执行到123</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span><br><span class="line">ret = func()</span><br><span class="line"><span class="built_in">print</span>(ret)  <span class="comment">#收到的是一个元组数据 (1,2,3,4)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="函数的作用域"><a href="#函数的作用域" class="headerlink" title="函数的作用域"></a>函数的作用域</h2><p><strong>global</strong>:在局部（在函数中），引入全局变量</p>
+<p><strong>nonlocal</strong>：在局部，引入外层的局部变量，从内到外，一层一层往外找。如果有就引入，如果没有就继续向外，直到全局（不包括全局）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    a = <span class="number">10</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func2</span>():</span><br><span class="line">        a = <span class="number">20</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">func3</span>():</span><br><span class="line">            <span class="keyword">nonlocal</span> a <span class="comment">#这里引入的是fun2的a </span></span><br><span class="line">            a =<span class="number">30</span> <span class="comment">#更改的是func2中a的值</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">	<span class="keyword">global</span> a <span class="comment">#把全局变量引入到局部</span></span><br><span class="line">    a = <span class="number">20</span></span><br><span class="line">func()</span><br><span class="line"><span class="built_in">print</span>(a) <span class="comment">#这里a就更改为20了</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>1，可以让一个变量常驻于内存</p>
+<p>2，避免全局变量被修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">	a = <span class="number">10</span> <span class="comment">#变量在函数体内部，不能通过global去修改，只能调用inner函数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>():</span><br><span class="line">    	<span class="keyword">nonlocal</span> a <span class="comment">#应用上一次的变量a </span></span><br><span class="line">    	<span class="keyword">return</span> a </span><br><span class="line">	<span class="keyword">return</span> inner <span class="comment">#返回 调用inner函数</span></span><br><span class="line">ret = func() <span class="comment">#返回了一个a值</span></span><br><span class="line">r1 = ret()</span><br><span class="line"><span class="built_in">print</span>(r1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数的装饰器"><a href="#函数的装饰器" class="headerlink" title="函数的装饰器"></a>函数的装饰器</h2><p>装饰器本质上是一个 Python 函数或类，它可以让其他函数或类在不需要做任何代码修改的前提下增加额外功能，装饰器的返回值也是一个函数&#x2F;类对象</p>
+<p>在运行函数前，将函数传入到装饰器里面，会先运行这个函数前的装饰器</p>
+<p>比较适应于登录验证操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">fn</span>):<span class="comment">#wrapper 装饰器 fn 目标函数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">*arg,**kwargs</span>):<span class="comment">#*,**表示接受所有参数，打包成元组和字典</span></span><br><span class="line">        <span class="comment">#在目标函数执行之前...</span></span><br><span class="line">        ret = fn(*args,**kwargs) <span class="comment">#目标函数</span></span><br><span class="line">        <span class="comment">#在目标函数执行之后...</span></span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> inner<span class="comment">#注意不能加()</span></span><br><span class="line"><span class="meta">@wrapper </span><span class="comment">#声明装饰器</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">target</span>():</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">target() <span class="comment"># =&gt;  inner()</span></span><br><span class="line"><span class="comment">#将target传入wrapper(),wrapper(target)&gt;inner()</span></span><br><span class="line"><span class="comment">#一个函数可以被多个装饰器装饰 </span></span><br><span class="line"><span class="comment">#规则和规律 wrapper1 wrapper2 tagert wrapper2 wrapper1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">guanjia</span>(<span class="params">game</span>):<span class="comment">#guanjia里面的game是形参</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">*args,**kwargs</span>):<span class="comment">#任何传递给inner的位置参数都会被args所接受，所有的关键字参数都被kwarg所接受</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;打开外挂&quot;</span>)</span><br><span class="line">        game(*arfs,**kwargs)<span class="comment">#将形参的函数这里打开 v实参</span></span><br><span class="line">        <span class="comment">#将一个元组或者字典一个个打开成位置参数和关键字参数</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;关闭外挂&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="meta">@guanjia </span><span class="comment">#play_dnf = guanjia(play_dnf) 这里通过装饰器包装，这里的play_dnf是实参 </span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">play_dnf</span>(<span class="params">username ,password</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;我要开始玩dnf了&quot;</span>,username ,password)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;你好啊，我叫赛利亚，今天是美好的一天&quot;</span>！)</span><br><span class="line">    </span><br><span class="line"><span class="meta">@guanjia </span><span class="comment">#play_lol = guanjia(play_lol)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">play_lol</span>(<span class="params">username,password,hero</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;我要开始玩lol了。&quot;</span>,uesername,password,hero)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;德玛西亚&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">play dnf(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;12345&quot;</span>) <span class="comment">#实际上是传入inner()里面</span></span><br><span class="line">play dnf(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;232131&quot;</span>,<span class="string">&quot;大盖伦&quot;</span>)</span><br><span class="line"><span class="comment">#因为玩每个游戏的所要调用的参数不同 所以inner()就要里面就要用*,**来接受所有参数</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">wrapper1</span>(<span class="params">fn</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">*args,**kwargs</span>):  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这里是wrapper1进入&quot;</span>) <span class="comment">#第一步</span></span><br><span class="line">        ret = fn(*args,**kwargs): <span class="comment">#进入wrapper.inner</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这里是wrapper1退出&quot;</span>)<span class="comment">#第五步</span></span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wrapper2</span>(<span class="params">fn</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(<span class="params">*args,**kwargs</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这里是wrapper2进入&quot;</span>) <span class="comment">#第二步</span></span><br><span class="line">        ret = fn(*args,**kwargs):<span class="comment">#进入target</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这里是wrapper2退出&quot;</span>)<span class="comment">#第四步</span></span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="meta">@wrapper1</span></span><br><span class="line"><span class="meta">@wrapper2</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">target</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;我是目标&quot;</span>)<span class="comment">#第三步</span></span><br><span class="line">target()</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出 这里是wrapper1进入 这里是wrapper2进入 我是目标 这里是wrapper2退出 这里是wrapper1退出</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>terabl:可迭代的东西  .iterator:迭代器</p>
+<p>可迭代的数据类型：str,list,tuple,dict,set,open()</p>
+<p>可迭代的数据类型都会提供一个叫做迭代器的东西，这个迭代器可以帮我们把数据类型中的数据逐一的拿到</p>
+<p>获取迭代器的两种方案：</p>
+<ol>
+<li>iter()内置函数可以直接拿到迭代器</li>
+<li>next() 从迭代器里面拿到数据</li>
+<li>__iter()__特殊方法</li>
+<li>__next()__特殊方法</li>
+</ol>
+<p>for循环里面一定是要拿迭代器的，所有不可迭代的东西不能用for循环</p>
+<p>for循环里面一定有__next__出现</p>
+<p>总结：迭代器统一了不同数据类型的遍历工作</p>
+<p>迭代器本身也是可以迭代的 </p>
+<p>迭代器本身的特性：</p>
+<p>1.只能向前，不能反复</p>
+<p>2.特别节省内存</p>
+<p>3.惰性机制</p>
+<h2 id="推导式"><a href="#推导式" class="headerlink" title="推导式"></a>推导式</h2><p>简化代码，节省内存</p>
+<p>语法：</p>
+<p>​	<strong>列表推导式：[数据 for循环 if判断]</strong></p>
+<p>​	<strong>集合推导式：{数据 for循环 if判断}</strong></p>
+<p>​	<strong>字典推导式：{k:v for循环 if判断}</strong></p>
+<p>不要不推导式妖魔化.</p>
+<p>(数据 for循环 if判断) —&gt; 不是元组推导式，根本就没有元组推导式。这个东西是生成器表达式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lst = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    lst.append(i)</span><br><span class="line"><span class="built_in">print</span>(lst)</span><br><span class="line"><span class="comment">#改成推导式</span></span><br><span class="line">lst[i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"><span class="built_in">print</span>(lst)</span><br><span class="line"><span class="comment">#请创建一个列表[1,3,5,7,9]</span></span><br><span class="line">lst[i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> i%<span class="number">2</span>!=<span class="number">0</span>]</span><br><span class="line">lst2 = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>,<span class="number">2</span>)] <span class="comment">#range(起始值，结束值，步长)</span></span><br><span class="line"><span class="comment">#生成20件衣服</span></span><br><span class="line">lst = [<span class="string">f&quot;衣服<span class="subst">&#123;i&#125;</span> for i in range(20)&quot;</span>]</span><br><span class="line"><span class="comment">#将如下列表中所有的英文字母修改成大写</span></span><br><span class="line">lst3 = [<span class="string">&quot;bob&quot;</span>,<span class="string">&quot;tom&quot;</span>,<span class="string">&quot;tony&quot;</span>,<span class="string">&quot;kevin&quot;</span>]</span><br><span class="line">lst4 = [item.upper() <span class="keyword">for</span> item <span class="keyword">in</span> lst3]</span><br><span class="line"><span class="comment">#请将下列的列表修改成字典，要求索引作为key,数据作为value</span></span><br><span class="line">lst5 = [<span class="string">&quot;林俊杰&quot;</span>，<span class="string">&quot;周杰伦&quot;</span>,<span class="string">&quot;林志玲&quot;</span>,<span class="string">&quot;刘德华&quot;</span>,<span class="string">&quot;梁朝伟&quot;</span>]</span><br><span class="line">dic6 = &#123;i:lst5[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(lst5))&#125;</span><br><span class="line"><span class="comment">#只要是代码可以调用的，都可以去试着调用，别局限思维</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p>语法:(数据 for循环 if判断) &gt;迭代器的特性，一次性的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gen = (i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="comment">#这是一个生成器 genderator 也是一个迭代器</span></span><br><span class="line"><span class="comment">#gen.__next__() #调用next方法逐个取出数据 一次取出一个</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> gen:</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line"><span class="comment">#生成器本质上是一个迭代器 ！！！！利用for循环取出后，里面的数据就没有了    </span></span><br><span class="line">lst = <span class="built_in">list</span>(gen)<span class="comment">#把迭代器转为列表</span></span><br><span class="line"><span class="built_in">print</span>(lst)<span class="comment">#输入这个列表就为空了，for循环已经把迭代器里面的内容全部取出来了，此时迭代器已经没内容了</span></span><br></pre></td></tr></table></figure>
+
+<p>生成器函数中有一个关键字yield</p>
+<p>生成器函数执行的时候，并不会执行函数，得到的是一个生成器</p>
+<p>yield:只要函数中出现了yield,他就是一个生成器函数</p>
+<p>作用：</p>
+<p>1，可以返回数据</p>
+<p>2，可以分段的执行函数中的内容，通多__next__()可以执行执行到下一个yield位置</p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>lambda表达式</p>
+<p>语法：变量 &#x3D; lambda 参数1,参数2,参数3…:返回值</p>
+<p>j &#x3D; lambda a,b: a+b</p>
+<h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><h3 id="zip"><a href="#zip" class="headerlink" title="zip"></a>zip</h3><p>zip：可以把多个 可迭代内容进行合并</p>
+<p> e g.多个列表一起的话，可以将每个相应项和并</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">lst1 = [<span class="string">&#x27;梁朝伟&#x27;</span>,<span class="string">&#x27;张国荣&#x27;</span>,<span class="string">&#x27;周星驰&#x27;</span>]</span><br><span class="line">lst2 = [<span class="string">&#x27;40&#x27;</span>,<span class="string">&#x27;38&#x27;</span>,<span class="string">&#x27;45&#x27;</span>]</span><br><span class="line">lst3 = [<span class="string">&quot;重庆森林&quot;</span>,<span class="string">&quot;阿飞正传&quot;</span>,<span class="string">&quot;007&quot;</span>]</span><br><span class="line"><span class="comment">#没用函数的方法</span></span><br><span class="line">res = [] <span class="comment">#创建一个列表放置数据</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(lst)):<span class="comment">#迭代每个数据的位置</span></span><br><span class="line">	one = lst1[i]</span><br><span class="line">    two = lst1[i]</span><br><span class="line">    three = lst1[i]</span><br><span class="line">    res.append((one,two,three))</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line">res = <span class="built_in">zip</span>(lst1,lst2,lst3)<span class="comment">#是一个迭代器</span></span><br><span class="line"><span class="comment">#用迭代方法取出数据</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> res:</span><br><span class="line">    <span class="built_in">print</span>(item)<span class="comment">#将每一类输出</span></span><br><span class="line">lst4 = <span class="built_in">list</span>(res) <span class="comment">#list()方法，将输出的东西生成一个列表</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="locals-函数和globals-函数"><a href="#locals-函数和globals-函数" class="headerlink" title="locals()函数和globals()函数"></a>locals()函数和globals()函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">188</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">locals</span>()) <span class="comment">#此时locals被写在全局作用域范围内，此时看到的就是全局作用域中的内容</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    a=<span class="number">226</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">locals</span>())<span class="comment">#此时locals放在局部作用于范围，看到的就是局部作用域的内容</span></span><br><span class="line">func()</span><br><span class="line">c = <span class="number">12</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">globals</span>())</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    a = <span class="number">36</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">globals</span>()) <span class="comment">#输出的还是当前全局范围的参数，global只能看全局范围的参数</span></span><br><span class="line"></span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+
+<h3 id="sorted：排序"><a href="#sorted：排序" class="headerlink" title="sorted：排序"></a>sorted：排序</h3><p>sorted() 作为 <a target="_blank" rel="noopener" href="https://c.biancheng.net/python/">Python</a> 内置函数之一，其功能是对序列（列表、元组、字典、集合、还包括字符串）进行排序。<br>sorted() 函数的基本语法格式如下：list &#x3D; sorted(iterable, key&#x3D;None, reverse&#x3D;False)  </p>
+<p>其中，iterable 表示指定的序列，key 参数可以自定义排序规则；reverse 参数指定以升序（False，默认）还是降序（True）进行排序。sorted() 函数会返回一个排好序的列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lst1 = [<span class="number">32413</span>,<span class="number">523535</span>,<span class="number">6</span>,<span class="number">36346627</span>,<span class="number">222</span>,<span class="number">525</span>]</span><br><span class="line">lst2 = <span class="built_in">sorted</span>(lst1)</span><br><span class="line"><span class="built_in">print</span>(lst2)<span class="comment">#生成[6, 222, 525, 32413, 523535, 36346627]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="filter-过滤"><a href="#filter-过滤" class="headerlink" title="filter:过滤"></a>filter:过滤</h3><p>filter()函数用于过滤序列，过滤掉不符合条件的元素，返回由符合条件元素组成的新列表。</p>
+<p><strong>fliter(function ,iterabel)</strong> 将iterabel(可迭代对象)的每一项数据拿出来交给前面函数执行</p>
+<p>参数：</p>
+<p>接受两个参数，第一个为函数，第二个为序列（可迭代对象），序列的每个元素作为参数传递给函数进行判断，然后返回True或False，最后将返回True的元素放到新列表中。</p>
+<p>function 判断函数，interable 可迭代对象</p>
+<p>和map不一样，只负责筛选，不会计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lst = [<span class="string">&quot;周杰伦&quot;</span>,<span class="string">&quot;周笔畅&quot;</span>,<span class="string">&quot;周迅&quot;</span>,<span class="string">&quot;张杰&quot;</span>,<span class="string">&quot;黄渤&quot;</span>]</span><br><span class="line">f = <span class="built_in">filter</span>(<span class="keyword">lambda</span> x : x.startswith(<span class="string">&quot;周&quot;</span>),lst)<span class="comment">#本质上filter是一个生成器</span></span><br><span class="line"><span class="comment">#匹配姓周的名字</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(f)) <span class="comment">#startswith() 匹配开头数据</span></span><br><span class="line"><span class="comment">#x.startswith(&quot;周&quot;), filter函数会筛选出开头为周的成员</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="map-映射"><a href="#map-映射" class="headerlink" title="map:映射"></a>map:映射</h3><p>将列表的东西给函数去计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lst = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">res = [item*item <span class="keyword">for</span> item <span class="keyword">in</span> lst]<span class="comment">#推导式</span></span><br><span class="line">r = <span class="built_in">map</span>(<span class="keyword">lambda</span> x : x * x,lst) </span><br><span class="line"><span class="built_in">print</span>(r) <span class="comment">#x^2</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/02/linux/" rel="prev" title="Linux的sshd服务和文件的属性">
+      <i class="fa fa-chevron-left"></i> Linux的sshd服务和文件的属性
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">函数的参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E4%BC%A0%E5%85%A5%E5%87%BD%E6%95%B0%E6%9C%89%E5%AF%B9%E5%BA%94%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">列表传入函数有对应的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ereturn"><span class="nav-number">1.2.</span> <span class="nav-text">关于return</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">函数的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AD%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">函数的装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">推导式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">6.1.</span> <span class="nav-text">生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">8.1.</span> <span class="nav-text">zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#locals-%E5%87%BD%E6%95%B0%E5%92%8Cglobals-%E5%87%BD%E6%95%B0"><span class="nav-number">8.2.</span> <span class="nav-text">locals()函数和globals()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sorted%EF%BC%9A%E6%8E%92%E5%BA%8F"><span class="nav-number">8.3.</span> <span class="nav-text">sorted：排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-%E8%BF%87%E6%BB%A4"><span class="nav-number">8.4.</span> <span class="nav-text">filter:过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map-%E6%98%A0%E5%B0%84"><span class="nav-number">8.5.</span> <span class="nav-text">map:映射</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhou muyun"
+      src="/images/avatar2.gif">
+  <p class="site-author-name" itemprop="name">Zhou muyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Liuxunzhang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Liuxunzhang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liuxunzhang1@gmail.com" title="E-Mail → mailto:liuxunzhang1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhou muyun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

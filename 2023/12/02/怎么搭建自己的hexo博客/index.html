@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="怎么用hexo和github搭建自己的博客">
+  <meta name="description" content="此篇介绍怎么用hexo和github搭建自己的博客，包括下载安装node、git、配置hexo、利用picgo做出自己的图床、配置typora">
 <meta property="og:type" content="article">
 <meta property="og:title" content="怎么搭建自己的hexo博客">
 <meta property="og:url" content="http://zhoumuyun.com/2023/12/02/%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84hexo%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Error">
-<meta property="og:description" content="怎么用hexo和github搭建自己的博客">
+<meta property="og:description" content="此篇介绍怎么用hexo和github搭建自己的博客，包括下载安装node、git、配置hexo、利用picgo做出自己的图床、配置typora">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634347.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634308.png">
@@ -51,7 +51,7 @@
 <meta property="og:image" content="c:/Users/19279/AppData/Roaming/Typora/typora-user-images/image-20231202172432614.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021725293.png">
 <meta property="article:published_time" content="2023-12-02T08:31:06.000Z">
-<meta property="article:modified_time" content="2023-12-02T13:26:51.746Z">
+<meta property="article:modified_time" content="2023-12-03T08:40:31.665Z">
 <meta property="article:author" content="Zhou muyun">
 <meta property="article:tag" content="分享">
 <meta name="twitter:card" content="summary">
@@ -208,10 +208,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-12-02 16:31:06 / 修改时间：21:26:51" itemprop="dateCreated datePublished" datetime="2023-12-02T16:31:06+08:00">2023-12-02</time>
+              <time title="创建时间：2023-12-02 16:31:06" itemprop="dateCreated datePublished" datetime="2023-12-02T16:31:06+08:00">2023-12-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-03 16:40:31" itemprop="dateModified" datetime="2023-12-03T16:40:31+08:00">2023-12-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -233,47 +239,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="怎么用hexo和github搭建自己的博客"><a href="#怎么用hexo和github搭建自己的博客" class="headerlink" title="怎么用hexo和github搭建自己的博客"></a>怎么用hexo和github搭建自己的博客</h3><span id="more"></span>
+        <p>此篇介绍怎么用hexo和github搭建自己的博客，包括下载安装node、git、配置hexo、利用picgo做出自己的图床、配置typora</p>
+<span id="more"></span>
 
-<h3 id="提前安装好-node-js-https-nodejs-org-en-左边的那个-20-10-0"><a href="#提前安装好-node-js-https-nodejs-org-en-左边的那个-20-10-0" class="headerlink" title="提前安装好(node.js)[https://nodejs.org/en] 左边的那个  20.10.0"></a>提前安装好(node.js)[<a target="_blank" rel="noopener" href="https://nodejs.org/en]">https://nodejs.org/en]</a> 左边的那个  20.10.0</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634347.png"></p>
-<h3 id="提前安装好-GIt-https-git-scm-com-downloads"><a href="#提前安装好-GIt-https-git-scm-com-downloads" class="headerlink" title="提前安装好(GIt)[https://git-scm.com/downloads]"></a>提前安装好(GIt)[<a target="_blank" rel="noopener" href="https://git-scm.com/downloads]">https://git-scm.com/downloads]</a></h3><h5 id="进入网站，点击home"><a href="#进入网站，点击home" class="headerlink" title="进入网站，点击home"></a>进入网站，点击home</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634308.png"></p>
-<h5 id="点击downloads"><a href="#点击downloads" class="headerlink" title="点击downloads"></a>点击downloads<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634769.png"></h5><h5 id="下载相应系统的版本"><a href="#下载相应系统的版本" class="headerlink" title="下载相应系统的版本"></a>下载相应系统的版本</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635380.png"></p>
-<h5 id="根据自己的处理器下载"><a href="#根据自己的处理器下载" class="headerlink" title="根据自己的处理器下载"></a>根据自己的处理器下载</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635853.png"></p>
-<h3 id="提前注册号一个GitHub账号"><a href="#提前注册号一个GitHub账号" class="headerlink" title="提前注册号一个GitHub账号"></a>提前注册号一个GitHub账号</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635380.png"></p>
-<h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><h5 id="创建一个目录放源文件，路径不要有中文"><a href="#创建一个目录放源文件，路径不要有中文" class="headerlink" title="创建一个目录放源文件，路径不要有中文"></a>创建一个目录放源文件，路径不要有中文<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635121.png"></h5><h5 id="在当前睦目录-D-hexo-下进入cmd界面"><a href="#在当前睦目录-D-hexo-下进入cmd界面" class="headerlink" title="在当前睦目录(D:hexo)下进入cmd界面"></a>在当前睦目录(D:hexo)下进入cmd界面</h5><h5 id="使用npm命令安装Hexo"><a href="#使用npm命令安装Hexo" class="headerlink" title="使用npm命令安装Hexo,"></a>使用npm命令安装Hexo,</h5><h6 id="npm-install-g-hexo-cli"><a href="#npm-install-g-hexo-cli" class="headerlink" title="npm install -g hexo-cli"></a>npm install -g hexo-cli</h6><p>hexo init blog<br>cd blog<br>hexo g</p>
-<p>构建好后的目录<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635135.png"></p>
-<h5 id="ssh-keygen-t-rsa-C-“邮件地址”-这里的邮件地址是GitHub的注册邮箱，成功后直接默认三次回车后，会在用户目录下生成C-Users-19279-ssh"><a href="#ssh-keygen-t-rsa-C-“邮件地址”-这里的邮件地址是GitHub的注册邮箱，成功后直接默认三次回车后，会在用户目录下生成C-Users-19279-ssh" class="headerlink" title="ssh-keygen -t rsa -C “邮件地址” 这里的邮件地址是GitHub的注册邮箱，成功后直接默认三次回车后，会在用户目录下生成C:\Users\19279.ssh"></a>ssh-keygen -t rsa -C “邮件地址” 这里的邮件地址是GitHub的注册邮箱，成功后直接默认三次回车后，会在用户目录下生成C:\Users\19279.ssh</h5><h5 id="进入用户下的C-Users-19279-ssh"><a href="#进入用户下的C-Users-19279-ssh" class="headerlink" title="进入用户下的C:\Users\19279.ssh"></a>进入用户下的C:\Users\19279.ssh</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635033.png"></p>
-<h5 id="用记事本打开id-rsa-pub-将里面的密钥进行全选复制"><a href="#用记事本打开id-rsa-pub-将里面的密钥进行全选复制" class="headerlink" title="用记事本打开id_rsa.pub,将里面的密钥进行全选复制"></a>用记事本打开id_rsa.pub,将里面的密钥进行全选复制</h5><h5 id="打开GitHub设置，点击SSH-and-GPG-keys选项，点击右上角New-SSH-key"><a href="#打开GitHub设置，点击SSH-and-GPG-keys选项，点击右上角New-SSH-key" class="headerlink" title="打开GitHub设置，点击SSH and GPG keys选项，点击右上角New SSH key"></a>打开GitHub设置，点击SSH and GPG keys选项，点击右上角New SSH key</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635622.png"></p>
-<h5 id="将id-ras-pub里面的密钥复制到"><a href="#将id-ras-pub里面的密钥复制到" class="headerlink" title="将id_ras.pub里面的密钥复制到"></a>将id_ras.pub里面的密钥复制到<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635800.png"></h5><h5 id="测试ssh-T-git-github-com，看能不能连通，出现提示后表示已经接通"><a href="#测试ssh-T-git-github-com，看能不能连通，出现提示后表示已经接通" class="headerlink" title="测试ssh -T git@github.com，看能不能连通，出现提示后表示已经接通"></a>测试ssh -T <a href="mailto:git@github.com">git@github.com</a>，看能不能连通，出现提示后表示已经接通</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635607.png"></p>
-<h5 id="在hexo根目录也就是D-hexo-blog，上面打开任务管理器下载hexo工具"><a href="#在hexo根目录也就是D-hexo-blog，上面打开任务管理器下载hexo工具" class="headerlink" title="在hexo根目录也就是D:\hexo\blog，上面打开任务管理器下载hexo工具"></a>在hexo根目录也就是D:\hexo\blog，上面打开任务管理器下载hexo工具</h5><p>npm install hexo-deployer-git –save</p>
-<h5 id="继续配置GitHub用户名和注册邮箱"><a href="#继续配置GitHub用户名和注册邮箱" class="headerlink" title="继续配置GitHub用户名和注册邮箱"></a>继续配置GitHub用户名和注册邮箱</h5><p>git config –-global user.name “liuxunzhang”&#x2F;&#x2F; 你的github用户名，非昵称<br>git config –-global user.email “<a href="mailto:xxx@qq.com">xxx@qq.com</a>“&#x2F;&#x2F; 填写你的github注册邮箱</p>
-<h5 id="在github上创建一个存储库"><a href="#在github上创建一个存储库" class="headerlink" title="在github上创建一个存储库"></a>在github上创建一个存储库<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021636509.png"></h5><h5 id="存储库命名为GitHub的用户名＋github-io"><a href="#存储库命名为GitHub的用户名＋github-io" class="headerlink" title="存储库命名为GitHub的用户名＋github.io"></a>存储库命名为GitHub的用户名＋github.io</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021636109.png"></p>
-<h5 id="打开hexo根目录，我这里是D-hexo-blog，找到-config-yml文件，定位到文件最后，将最后改成这种形式"><a href="#打开hexo根目录，我这里是D-hexo-blog，找到-config-yml文件，定位到文件最后，将最后改成这种形式" class="headerlink" title="打开hexo根目录，我这里是D:\hexo\blog，找到_config.yml文件，定位到文件最后，将最后改成这种形式"></a>打开hexo根目录，我这里是D:\hexo\blog，找到_config.yml文件，定位到文件最后，将最后改成这种形式</h5><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021653100.png"></p>
-<h4 id="这是hexo的指令"><a href="#这是hexo的指令" class="headerlink" title="这是hexo的指令"></a>这是hexo的指令</h4><p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
+<h1 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h1><p>提前安装好(node.js)[<a target="_blank" rel="noopener" href="https://nodejs.org/en]">https://nodejs.org/en]</a> </p>
+<p>点击左边的那个  20.10.0</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634347.png"></p>
+<h1 id="安装GIt"><a href="#安装GIt" class="headerlink" title="安装GIt"></a>安装GIt</h1><p>提前安装好(GIt)[<a target="_blank" rel="noopener" href="https://git-scm.com/downloads]">https://git-scm.com/downloads]</a></p>
+<p>1，进入网站，点击home</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634308.png"></p>
+<p>2，点击downloads<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021634769.png"></p>
+<p>3，下载相应系统的版本</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635380.png"></p>
+<p>4，根据自己的处理器下载</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635853.png"></p>
+<h1 id="提前注册一个GitHub账号"><a href="#提前注册一个GitHub账号" class="headerlink" title="提前注册一个GitHub账号"></a>提前注册一个GitHub账号</h1><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635380.png"></p>
+<h1 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h1><p>1，创建一个目录放源文件，路径不要有中文<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635121.png"></p>
+<p>2，在当前目录(D:hexo)下进入cmd界面</p>
+<p>3，使用npm命令安装Hexo,</p>
+<p>​	<strong>npm install -g hexo-cli</strong></p>
+<p>​	<strong>hexo init blog</strong><br>​	<strong>cd blog</strong><br>​	<strong>hexo g</strong></p>
+<p>这是构建好后的目录</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635135.png"></p>
+<p>4，在cmd界面输入<strong>ssh-keygen -t rsa -C “邮件地址”</strong></p>
+<p>这里的邮件地址是GitHub的注册邮箱，成功后直接默认三次回车后，会在用户目录下生成C:\Users\19279.ssh</p>
+<p>5，进入用户下的C:\Users\19279.ssh</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635033.png"></p>
+<p>6， 用记事本打开id_rsa.pub,将里面的密钥进行全选复制</p>
+<p>7，打开GitHub设置，点击SSH and GPG keys选项，点击右上角New SSH key</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635622.png"></p>
+<p>8，将id_ras.pub里面的密钥复制到<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635800.png"></p>
+<p>9， 测试ssh -T <a href="mailto:git@github.com">git@github.com</a>，看能不能连通，出现提示后表示已经接通</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021635607.png"></p>
+<p>10，在hexo根目录也就是D:\hexo\blog，上面打开任务管理器下载hexo工具</p>
+<p>npm install hexo-deployer-git –save</p>
+<p>11，继续配置GitHub用户名和注册邮箱</p>
+<p>git config –-global user.name “liuxunzhang”&#x2F;&#x2F; 你的github用户名，非昵称<br>git config –-global user.email “<a href="mailto:xxx@qq.com">xxx@qq.com</a>“&#x2F;&#x2F; 填写你的github注册邮箱</p>
+<p>12，在github上创建一个存储库<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021636509.png"></p>
+<p>13， 存储库命名为GitHub的用户名＋github.io</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021636109.png"></p>
+<p>14，打开hexo根目录，我这里是D:\hexo\blog，找到_config.yml文件，定位到文件最后，将最后改成这种形式</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021653100.png"></p>
+<h2 id="这是hexo的指令"><a href="#这是hexo的指令" class="headerlink" title="这是hexo的指令"></a>这是hexo的指令</h2><p>hexo n “我的博客” &#x3D;&#x3D; hexo new “我的博客” #新建文章<br>hexo new page “pageName” #新建页面<br>hexo g &#x3D;&#x3D; hexo generate #生成<br>hexo s &#x3D;&#x3D; hexo server #启动服务预览<br>hexo d &#x3D;&#x3D; hexo deploy #部署</p>
 <p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令<br>hexo version  #查看Hexo的版本<br>hexo generate #生成静态页面至public目录</p>
 <p>hexo s -g #生成并本地预览<br>hexo d -g #生成并上传</p>
-<h3 id="picgo图床的配置"><a href="#picgo图床的配置" class="headerlink" title="picgo图床的配置"></a>picgo图床的配置</h3><p>进入这个网站<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<h1 id="picgo图床的配置"><a href="#picgo图床的配置" class="headerlink" title="picgo图床的配置"></a>picgo图床的配置</h1><p>1，进入这个网站<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
 <p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021702653.png"></p>
 <p>我这里下载的是picgo-setup-2.4.0-beta.6.exe版本</p>
-<p>下载安装到一个文件夹，后面要用上</p>
-<p>在GitHub新建一个存储库作为图床</p>
+<p>2，下载安装到一个文件夹，后面要用上</p>
+<p>3，在GitHub新建一个存储库作为图床</p>
 <p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021711835.png"></p>
-<p>点击头像&gt;打开setting&gt;GitHub&gt;打开最下面的Developer Settings&gt;Personal access tokens&gt;Token（classic)<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021716033.png"></p>
-<p>点击右上角Generate new token&gt;Generate new token(classic)</p>
-<p>将里面的改成这样，名字可以随便取</p>
+<p>4，点击头像&gt;打开setting&gt;GitHub&gt;打开最下面的Developer Settings&gt;Personal access tokens&gt;Token（classic)<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021716033.png"></p>
+<p>5，点击右上角Generate new token&gt;Generate new token(classic)</p>
+<p>​	将里面的改成这样，名字可以随便取</p>
 <p><img src="C:/Users/19279/AppData/Roaming/Typora/typora-user-images/image-20231202171824731.png" alt="image-20231202171824731"></p>
-<p>生成token后全选复制&gt;然后打开picgo&gt;图床设置&gt;</p>
+<p>6，生成token后全选复制&gt;然后打开picgo&gt;图床设置&gt;</p>
 <p>名字可以随便取</p>
 <p>仓库名是自己GitHub图床的名字</p>
 <p>分支名字这里是main</p>
 <p>Token就是上面复制到那些</p>
 <p>存储路径在自己的盘里面</p>
 <p><img src="C:/Users/19279/AppData/Roaming/Typora/typora-user-images/image-20231202171954206.png" alt="image-20231202171954206"></p>
-<p>将这个图床设置为默认图床</p>
+<p>7，将这个图床设置为默认图床</p>
 <p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021723990.png"></p>
-<h3 id="配置Typora"><a href="#配置Typora" class="headerlink" title="配置Typora"></a>配置Typora</h3><p>打开typora&gt;点击文件&gt;打开偏好设置&gt;</p>
+<h1 id="配置Typora"><a href="#配置Typora" class="headerlink" title="配置Typora"></a>配置Typora</h1><p>1，打开typora&gt;点击文件&gt;打开偏好设置&gt;</p>
 <p><img src="C:/Users/19279/AppData/Roaming/Typora/typora-user-images/image-20231202172432614.png" alt="image-20231202172432614"></p>
-<p>打开图像设置 勾选前面四个&gt;将商创服务改成picgo,路径改成picgo的安装包位置</p>
+<p>2，打开图像设置 勾选前面四个&gt;将商创服务改成picgo,路径改成picgo的安装包位置</p>
 <p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312021725293.png"></p>
 
     </div>
@@ -358,7 +389,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%94%A8hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.</span> <span class="nav-text">怎么用hexo和github搭建自己的博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%89%8D%E5%AE%89%E8%A3%85%E5%A5%BD-node-js-https-nodejs-org-en-%E5%B7%A6%E8%BE%B9%E7%9A%84%E9%82%A3%E4%B8%AA-20-10-0"><span class="nav-number">2.</span> <span class="nav-text">提前安装好(node.js)[https:&#x2F;&#x2F;nodejs.org&#x2F;en] 左边的那个  20.10.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%89%8D%E5%AE%89%E8%A3%85%E5%A5%BD-GIt-https-git-scm-com-downloads"><span class="nav-number">3.</span> <span class="nav-text">提前安装好(GIt)[https:&#x2F;&#x2F;git-scm.com&#x2F;downloads]</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E7%BD%91%E7%AB%99%EF%BC%8C%E7%82%B9%E5%87%BBhome"><span class="nav-number">3.0.1.</span> <span class="nav-text">进入网站，点击home</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%82%B9%E5%87%BBdownloads"><span class="nav-number">3.0.2.</span> <span class="nav-text">点击downloads</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E7%9B%B8%E5%BA%94%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">3.0.3.</span> <span class="nav-text">下载相应系统的版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E5%A4%84%E7%90%86%E5%99%A8%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.0.4.</span> <span class="nav-text">根据自己的处理器下载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%89%8D%E6%B3%A8%E5%86%8C%E5%8F%B7%E4%B8%80%E4%B8%AAGitHub%E8%B4%A6%E5%8F%B7"><span class="nav-number">4.</span> <span class="nav-text">提前注册号一个GitHub账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEhexo"><span class="nav-number">5.</span> <span class="nav-text">配置hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%9B%AE%E5%BD%95%E6%94%BE%E6%BA%90%E6%96%87%E4%BB%B6%EF%BC%8C%E8%B7%AF%E5%BE%84%E4%B8%8D%E8%A6%81%E6%9C%89%E4%B8%AD%E6%96%87"><span class="nav-number">5.0.1.</span> <span class="nav-text">创建一个目录放源文件，路径不要有中文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8%E5%BD%93%E5%89%8D%E7%9D%A6%E7%9B%AE%E5%BD%95-D-hexo-%E4%B8%8B%E8%BF%9B%E5%85%A5cmd%E7%95%8C%E9%9D%A2"><span class="nav-number">5.0.2.</span> <span class="nav-text">在当前睦目录(D:hexo)下进入cmd界面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8npm%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85Hexo"><span class="nav-number">5.0.3.</span> <span class="nav-text">使用npm命令安装Hexo,</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#npm-install-g-hexo-cli"><span class="nav-number">5.0.3.1.</span> <span class="nav-text">npm install -g hexo-cli</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh-keygen-t-rsa-C-%E2%80%9C%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E2%80%9D-%E8%BF%99%E9%87%8C%E7%9A%84%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E6%98%AFGitHub%E7%9A%84%E6%B3%A8%E5%86%8C%E9%82%AE%E7%AE%B1%EF%BC%8C%E6%88%90%E5%8A%9F%E5%90%8E%E7%9B%B4%E6%8E%A5%E9%BB%98%E8%AE%A4%E4%B8%89%E6%AC%A1%E5%9B%9E%E8%BD%A6%E5%90%8E%EF%BC%8C%E4%BC%9A%E5%9C%A8%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%94%9F%E6%88%90C-Users-19279-ssh"><span class="nav-number">5.0.4.</span> <span class="nav-text">ssh-keygen -t rsa -C “邮件地址” 这里的邮件地址是GitHub的注册邮箱，成功后直接默认三次回车后，会在用户目录下生成C:\Users\19279.ssh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E7%94%A8%E6%88%B7%E4%B8%8B%E7%9A%84C-Users-19279-ssh"><span class="nav-number">5.0.5.</span> <span class="nav-text">进入用户下的C:\Users\19279.ssh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%A8%E8%AE%B0%E4%BA%8B%E6%9C%AC%E6%89%93%E5%BC%80id-rsa-pub-%E5%B0%86%E9%87%8C%E9%9D%A2%E7%9A%84%E5%AF%86%E9%92%A5%E8%BF%9B%E8%A1%8C%E5%85%A8%E9%80%89%E5%A4%8D%E5%88%B6"><span class="nav-number">5.0.6.</span> <span class="nav-text">用记事本打开id_rsa.pub,将里面的密钥进行全选复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%93%E5%BC%80GitHub%E8%AE%BE%E7%BD%AE%EF%BC%8C%E7%82%B9%E5%87%BBSSH-and-GPG-keys%E9%80%89%E9%A1%B9%EF%BC%8C%E7%82%B9%E5%87%BB%E5%8F%B3%E4%B8%8A%E8%A7%92New-SSH-key"><span class="nav-number">5.0.7.</span> <span class="nav-text">打开GitHub设置，点击SSH and GPG keys选项，点击右上角New SSH key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86id-ras-pub%E9%87%8C%E9%9D%A2%E7%9A%84%E5%AF%86%E9%92%A5%E5%A4%8D%E5%88%B6%E5%88%B0"><span class="nav-number">5.0.8.</span> <span class="nav-text">将id_ras.pub里面的密钥复制到</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95ssh-T-git-github-com%EF%BC%8C%E7%9C%8B%E8%83%BD%E4%B8%8D%E8%83%BD%E8%BF%9E%E9%80%9A%EF%BC%8C%E5%87%BA%E7%8E%B0%E6%8F%90%E7%A4%BA%E5%90%8E%E8%A1%A8%E7%A4%BA%E5%B7%B2%E7%BB%8F%E6%8E%A5%E9%80%9A"><span class="nav-number">5.0.9.</span> <span class="nav-text">测试ssh -T git@github.com，看能不能连通，出现提示后表示已经接通</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8hexo%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B9%9F%E5%B0%B1%E6%98%AFD-hexo-blog%EF%BC%8C%E4%B8%8A%E9%9D%A2%E6%89%93%E5%BC%80%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%8B%E8%BD%BDhexo%E5%B7%A5%E5%85%B7"><span class="nav-number">5.0.10.</span> <span class="nav-text">在hexo根目录也就是D:\hexo\blog，上面打开任务管理器下载hexo工具</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%A7%E7%BB%AD%E9%85%8D%E7%BD%AEGitHub%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E6%B3%A8%E5%86%8C%E9%82%AE%E7%AE%B1"><span class="nav-number">5.0.11.</span> <span class="nav-text">继续配置GitHub用户名和注册邮箱</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9C%A8github%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AD%98%E5%82%A8%E5%BA%93"><span class="nav-number">5.0.12.</span> <span class="nav-text">在github上创建一个存储库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BA%93%E5%91%BD%E5%90%8D%E4%B8%BAGitHub%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D%EF%BC%8Bgithub-io"><span class="nav-number">5.0.13.</span> <span class="nav-text">存储库命名为GitHub的用户名＋github.io</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%93%E5%BC%80hexo%E6%A0%B9%E7%9B%AE%E5%BD%95%EF%BC%8C%E6%88%91%E8%BF%99%E9%87%8C%E6%98%AFD-hexo-blog%EF%BC%8C%E6%89%BE%E5%88%B0-config-yml%E6%96%87%E4%BB%B6%EF%BC%8C%E5%AE%9A%E4%BD%8D%E5%88%B0%E6%96%87%E4%BB%B6%E6%9C%80%E5%90%8E%EF%BC%8C%E5%B0%86%E6%9C%80%E5%90%8E%E6%94%B9%E6%88%90%E8%BF%99%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="nav-number">5.0.14.</span> <span class="nav-text">打开hexo根目录，我这里是D:\hexo\blog，找到_config.yml文件，定位到文件最后，将最后改成这种形式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%99%E6%98%AFhexo%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="nav-number">5.1.</span> <span class="nav-text">这是hexo的指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#picgo%E5%9B%BE%E5%BA%8A%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">picgo图床的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AETypora"><span class="nav-number">7.</span> <span class="nav-text">配置Typora</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85node"><span class="nav-number">1.</span> <span class="nav-text">安装node</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85GIt"><span class="nav-number">2.</span> <span class="nav-text">安装GIt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E5%89%8D%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AAGitHub%E8%B4%A6%E5%8F%B7"><span class="nav-number">3.</span> <span class="nav-text">提前注册一个GitHub账号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEhexo"><span class="nav-number">4.</span> <span class="nav-text">配置hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E6%98%AFhexo%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">这是hexo的指令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#picgo%E5%9B%BE%E5%BA%8A%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">picgo图床的配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AETypora"><span class="nav-number">6.</span> <span class="nav-text">配置Typora</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -374,14 +405,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
