@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-09 19:19:55 / 修改时间：19:20:45" itemprop="dateCreated datePublished" datetime="2023-12-09T19:19:55+08:00">2023-12-09</time>
+              <time title="创建时间：2023-12-09 19:19:55 / 修改时间：19:22:20" itemprop="dateCreated datePublished" datetime="2023-12-09T19:19:55+08:00">2023-12-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,40 +205,14 @@
 
       
           <p>这篇介绍了网络地址的划分和范围，数据包的流向，osi模型，虚拟网卡和路由表的作用</p>
-<!----->
-
-
-
-<h1 id="IP地址划分"><a href="#IP地址划分" class="headerlink" title="IP地址划分"></a>IP地址划分</h1><h3 id="网络地址分为五个段，一般使用的是三个类，D类和C类不常用"><a href="#网络地址分为五个段，一般使用的是三个类，D类和C类不常用" class="headerlink" title="网络地址分为五个段，一般使用的是三个类，D类和C类不常用"></a>网络地址分为五个段，一般使用的是三个类，D类和C类不常用</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052012693.png"></p>
-<p>A类IP地址：在IP地址的四段号码中，第一段号码为网络号码，剩下的三段号码为本地计算机的号码。所以A类IP地址的网络地址数量少，只有126个网络，但每个网络可以容纳的主机数量有1600多万台。127.255.255.255是广播地址。</p>
-<p>B类IP地址：B类IP地址的前2个字节代表网络地址，后2个字节代表主机地址，这类IP地址适用于中等规模的网络，有16384个网络，每个网络所能容纳的计算机数为6万多台</p>
-<p>C类IP地址：C类IP地址的前三段为网络号码，剩下的一段号码为本地计算机号码。所以C类网络地址数量较多，有209万多个网络，适用于小规模的局域网络，每个网络可以容纳254台计算机</p>
-<p>D类IP地址：D类IP地址在历史上叫多播地址，也叫组播地址。在以太网中，多播地址命名了一组应该在这个网络中应用接收到一个分组的站点。多播地址的最高位必须是“1110”，范围从224.0.0.0到239.255.255.255。</p>
-<p>ABC段都保留了一部分地址供我们私网使用</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052013543.png"></p>
-<h2 id="数据包怎么到你想要访问的服务器"><a href="#数据包怎么到你想要访问的服务器" class="headerlink" title="数据包怎么到你想要访问的服务器"></a>数据包怎么到你想要访问的服务器</h2><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052014721.png"></p>
-<p>数据包的流向：私网IP地址–&gt;路由器–&gt;光猫转化为公网IP–光纤–&gt;云–&gt;百度的公网IP</p>
-<h2 id="一般的内网怎么划分的"><a href="#一般的内网怎么划分的" class="headerlink" title="一般的内网怎么划分的"></a>一般的内网怎么划分的</h2><p>学校的内网用一个IP将内网分配</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052016167.png"></p>
-<h2 id="路由和IP分配"><a href="#路由和IP分配" class="headerlink" title="路由和IP分配"></a>路由和IP分配</h2><p>路由有静态路由和动态路由</p>
-<p>静态路由:自己设定的下一跳，然后路由跟着自己的下一跳去走</p>
-<p>动态路由:路由器自己分配最优路径，下一跳为动态分配</p>
-<p>IP分配有静态ip和动态(DHCP)IP地址分配</p>
-<p>静态IP：自己设置ip地址</p>
-<p>动态ip：dhcp配置地址</p>
-<p>当一个内网里面，IP相同，会发生冲突，有可能会两台主机都上不了网</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052017734.png"></p>
-<h1 id="osi模型"><a href="#osi模型" class="headerlink" title="osi模型"></a>osi模型</h1><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052020417.png"></p>
-<h1 id="路由表的作用"><a href="#路由表的作用" class="headerlink" title="路由表的作用"></a>路由表的作用</h1><p>教室1的PC1要是想连接教室2的PC2，</p>
-<p>经过路由器1</p>
-<p>路由器1配置路由表指向路由器2</p>
-<p>路由器2中有PC2的mac地址</p>
-<p>然后路由器2的下一跳就到PC2</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052022289.png"></p>
-<h1 id="虚拟网卡的作用"><a href="#虚拟网卡的作用" class="headerlink" title="虚拟网卡的作用"></a>虚拟网卡的作用</h1><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052026124.png"></p>
-<p>桥接：借用主机的网卡地址进行通信</p>
-<p>nat：转化为虚拟地址，通过虚拟网卡与主机通信，从而与外界上网</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/09/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
