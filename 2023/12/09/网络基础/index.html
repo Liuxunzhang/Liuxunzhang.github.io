@@ -20,28 +20,42 @@
     var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Error">
-<meta property="og:url" content="http://zhoumuyun.com/index.html">
+  <meta name="description" content="这篇介绍了网络地址的划分和范围，数据包的流向，osi模型，虚拟网卡和路由表的作用     IP地址划分网络地址分为五个段，一般使用的是三个类，D类和C类不常用 A类IP地址：在IP地址的四段号码中，第一段号码为网络号码，剩下的三段号码为本地计算机的号码。所以A类IP地址的网络地址数量少，只有126个网络，但每个网络可以容纳的主机数量有1600多万台。127.255.255.255是广播地址。 B类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络基础">
+<meta property="og:url" content="http://zhoumuyun.com/2023/12/09/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Error">
+<meta property="og:description" content="这篇介绍了网络地址的划分和范围，数据包的流向，osi模型，虚拟网卡和路由表的作用     IP地址划分网络地址分为五个段，一般使用的是三个类，D类和C类不常用 A类IP地址：在IP地址的四段号码中，第一段号码为网络号码，剩下的三段号码为本地计算机的号码。所以A类IP地址的网络地址数量少，只有126个网络，但每个网络可以容纳的主机数量有1600多万台。127.255.255.255是广播地址。 B类">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052012693.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052013543.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052014721.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052016167.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052017734.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052020417.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052022289.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052026124.png">
+<meta property="article:published_time" content="2023-12-09T11:19:55.000Z">
+<meta property="article:modified_time" content="2023-12-09T11:20:45.166Z">
 <meta property="article:author" content="Zhou muyun">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312052012693.png">
 
-<link rel="canonical" href="http://zhoumuyun.com/">
+<link rel="canonical" href="http://zhoumuyun.com/2023/12/09/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Error</title>
+  <title>网络基础 | Error</title>
   
 
 
@@ -150,9 +164,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -168,10 +183,9 @@
       <meta itemprop="name" content="Error">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/09/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">网络基础</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          网络基础
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -204,7 +218,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>这篇介绍了网络地址的划分和范围，数据包的流向，osi模型，虚拟网卡和路由表的作用</p>
+        <p>这篇介绍了网络地址的划分和范围，数据包的流向，osi模型，虚拟网卡和路由表的作用</p>
 <!----->
 
 
@@ -239,339 +253,33 @@
 <p>桥接：借用主机的网卡地址进行通信</p>
 <p>nat：转化为虚拟地址，通过虚拟网卡与主机通信，从而与外界上网</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2023/12/03/python%E7%9A%84%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar2.gif">
-      <meta itemprop="name" content="Zhou muyun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Error">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/03/python%E7%9A%84%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">python的函数说明</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-03 16:22:58 / 修改时间：16:24:12" itemprop="dateCreated datePublished" datetime="2023-12-03T16:22:58+08:00">2023-12-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">python笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>此篇介绍了函数的参数、函数的作用域、闭包、函数的装饰器、迭代器、推导式、生成器、匿名函数、内置函数</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/03/python%E7%9A%84%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2023/12/02/linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar2.gif">
-      <meta itemprop="name" content="Zhou muyun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Error">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/02/linux/" class="post-title-link" itemprop="url">Linux的sshd服务和文件的属性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-02 21:30:40" itemprop="dateCreated datePublished" datetime="2023-12-02T21:30:40+08:00">2023-12-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-03 16:28:01" itemprop="dateModified" datetime="2023-12-03T16:28:01+08:00">2023-12-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">linux笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>此篇介绍了sshd的服务配置，Linux的文件属性</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/02/linux/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/03/python%E7%9A%84%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E/" rel="prev" title="python的函数说明">
+      <i class="fa fa-chevron-left"></i> python的函数说明
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2023/12/02/%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84hexo%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar2.gif">
-      <meta itemprop="name" content="Zhou muyun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Error">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/02/%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84hexo%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">怎么搭建自己的hexo博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-02 16:31:06" itemprop="dateCreated datePublished" datetime="2023-12-02T16:31:06+08:00">2023-12-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-03 16:40:31" itemprop="dateModified" datetime="2023-12-03T16:40:31+08:00">2023-12-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%80%8E%E4%B9%88%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">怎么创建自己的博客</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>此篇介绍怎么用hexo和github搭建自己的博客，包括下载安装node、git、配置hexo、利用picgo做出自己的图床、配置typora</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/02/%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84hexo%E5%8D%9A%E5%AE%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2023/12/01/new/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar2.gif">
-      <meta itemprop="name" content="Zhou muyun">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Error">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/01/new/" class="post-title-link" itemprop="url">简单的木马病毒</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-01 20:42:09" itemprop="dateCreated datePublished" datetime="2023-12-01T20:42:09+08:00">2023-12-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-03 16:43:52" itemprop="dateModified" datetime="2023-12-03T16:43:52+08:00">2023-12-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">网络安全</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>此篇包括telegram社工群的地址，永恒之黑的使用，利用mip22制作钓鱼网站，制作网页传播木马，伪装木马，压缩包携带木马，压缩包木马更换图标</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/01/new/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -624,6 +332,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IP%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">IP地址划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E5%88%86%E4%B8%BA%E4%BA%94%E4%B8%AA%E6%AE%B5%EF%BC%8C%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AF%E4%B8%89%E4%B8%AA%E7%B1%BB%EF%BC%8CD%E7%B1%BB%E5%92%8CC%E7%B1%BB%E4%B8%8D%E5%B8%B8%E7%94%A8"><span class="nav-number">1.0.1.</span> <span class="nav-text">网络地址分为五个段，一般使用的是三个类，D类和C类不常用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E6%80%8E%E4%B9%88%E5%88%B0%E4%BD%A0%E6%83%B3%E8%A6%81%E8%AE%BF%E9%97%AE%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">数据包怎么到你想要访问的服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E7%9A%84%E5%86%85%E7%BD%91%E6%80%8E%E4%B9%88%E5%88%92%E5%88%86%E7%9A%84"><span class="nav-number">1.2.</span> <span class="nav-text">一般的内网怎么划分的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%92%8CIP%E5%88%86%E9%85%8D"><span class="nav-number">1.3.</span> <span class="nav-text">路由和IP分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#osi%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">osi模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A1%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">路由表的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">虚拟网卡的作用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
