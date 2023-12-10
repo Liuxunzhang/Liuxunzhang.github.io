@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-10 09:18:45 / 修改时间：09:21:20" itemprop="dateCreated datePublished" datetime="2023-12-10T09:18:45+08:00">2023-12-10</time>
+              <time title="创建时间：2023-12-10 09:18:45 / 修改时间：09:28:38" itemprop="dateCreated datePublished" datetime="2023-12-10T09:18:45+08:00">2023-12-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,110 +205,14 @@
 
       
           <p>此篇介绍了css的盒子模型,HTML的基本元素,css和html的结合等基础知识</p>
-<h1 id="盒模型示意图："><a href="#盒模型示意图：" class="headerlink" title="盒模型示意图："></a>盒模型示意图：</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">luaCopy code</span><br><span class="line">+-------------------------------------+</span><br><span class="line">|              Margin                 |</span><br><span class="line">|    +---------------------------+    |</span><br><span class="line">|    |           Border          |    |</span><br><span class="line">|    |  +---------------------+  |    |</span><br><span class="line">|    |  |      Padding        |  |    |</span><br><span class="line">|    |  |  +---------------+  |  |    |</span><br><span class="line">|    |  |  |   Content     |  |  |    |</span><br><span class="line">|    |  |  |               |  |  |    |</span><br><span class="line">|    |  |  +---------------+  |  |    |</span><br><span class="line">|    |  +---------------------+  |    |</span><br><span class="line">|    +---------------------------+    |</span><br><span class="line">|                                     |</span><br><span class="line">+-------------------------------------+</span><br></pre></td></tr></table></figure>
-
-<h2 id="盒模型的组成部分："><a href="#盒模型的组成部分：" class="headerlink" title="盒模型的组成部分："></a>盒模型的组成部分：</h2><p><strong>内容区域（Content）：</strong>内容区域是元素实际包含内容的区域，例如文本、图像或其他子元素。这个区域的大小可以通过设置 <strong>width</strong> 和 <strong>height</strong> 属性来控制</p>
-<p><strong>内边距（Padding）：</strong>内边距是内容区域与边框之间的区域。它提供了一种方法来控制内容与边框之间的空间。可以使用 <strong>padding</strong> 属性来设置内边距的大小</p>
-<p><strong>边框（Border）：</strong>边框是围绕在内边距外部的区域，用于包围元素内容。可以使用 <strong>border</strong> 属性来定义边框的宽度、样式和颜色</p>
-<p><strong>外边距（Margin）：</strong>外边距是元素与其他元素之间的空白区域。它用于控制元素与周围元素之间的距离。可以使用 <strong>margin</strong> 属性来设置外边距的大小</p>
-<h2 id="模型的计算方式："><a href="#模型的计算方式：" class="headerlink" title="模型的计算方式："></a>模型的计算方式：</h2><p><strong>content Width&#x2F;Height（内容宽度&#x2F;高度）：</strong>由 <strong>width</strong> 和 <strong>height</strong> 属性设置，表示内容区域的大小</p>
-<p><strong>padding（内边距）：</strong>在内容区域和边框之间。例如：<strong>padding: 10px;</strong> 表示内边距为 10 像素</p>
-<p><strong>border（边框）：</strong>包围在内边距外部。例如：<strong>border: 1px solid #000;</strong> 表示边框为 1 像素的黑色实线</p>
-<p><strong>Margin（外边距）：</strong>元素与周围元素之间的空白区域。例如：<strong>margin: 20px;</strong> 表示外边距为 20 像素</p>
-<p>- </p>
-<h1 id="HTML的基本元素"><a href="#HTML的基本元素" class="headerlink" title="HTML的基本元素"></a>HTML的基本元素</h1><p><strong>标题元素 (<h1>, <h2>,<h3>,<h4>,<h5>,<h6>)：</strong> 用于定义页面的标题层级，从 <h1> 表示最高级标题，到 <h6>表示最低级标题。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>这是一级标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>这是二级标题<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>段落元素 (<strong><strong><p></strong></strong>)：</strong> 用于定义段落文本。示例:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>链接元素 (<strong><strong><a></strong></strong>)：</strong> 用于创建超链接到其他页面或资源。<strong>href</strong> 属性指定链接的目标。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.example.com&quot;</span>&gt;</span>访问示例网站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>列表元素 (<strong><strong><ul></strong></strong>,</strong> <strong><ol>****,</strong> <strong><li>****)：</strong></p>
-<ul>
-<li><ul>
-<li>无序列表 (<strong><ul></strong>) 用于创建项目不排序的列表。</li>
-<li>有序列表 (<strong><ol></strong>) 用于创建项目排序的列表。</li>
-<li>列表项 (<strong><li></strong>) 用于定义列表中的每个项目。示例：</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>项目 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>第一项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>第二项<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>图像元素 (<img>)：</strong> 用于在网页中嵌入图像。<strong>src</strong> 属性指定图像的 URL。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;image.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;图片描述&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>水平线元素 (<hr>)：</strong> 用于创建水平分隔线。通常用于分隔段落或内容区域。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>表格元素 (<table>, <tr>,<td>,<th>)：</strong> 用于创建表格。**<table>** 表示整个表格，**<tr>** 表示表格的行，**<td>** 表示表格的单元格，**<th>** 表示表格的表头单元格。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>表头1<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>表头2<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>数据1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>数据2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>表单元素 (<form>,<input>,<button>,<textarea>,<select>)：</strong> 用于创建表单，收集用户输入的信息。**<form>** 表示整个表单，**<input>** 用于创建各种输入字段（文本框、复选框等），**<button>** 创建按钮，**<textarea>** 创建多行文本输入区域，**<select>** 创建下拉列表。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入姓名&quot;</span> <span class="attr">required</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入邮箱&quot;</span> <span class="attr">required</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>标题组 (<header>,<footer>)、主要内容 (<main>)、侧边栏 (<aside>)、文章 (<article>)：</strong> 这些元素用于更好地表示页面的结构和内容组织。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>网站标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 其他导航链接 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>文章标题<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>文章内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">aside</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>侧边栏标题<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 侧边栏内容 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>网站版权信息<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>注释 (<!-- -->)：</strong> 用于在 HTML 中添加注释，注释内容不会在浏览器中显示。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="comment">&lt;!-- 这是一个注释，用于说明一些内容 --&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>嵌套元素：</strong> HTML 元素可以嵌套在其他元素内部，构建更复杂的结构。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>列表项 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>按钮元素 (<button>)：</strong> 用于创建点击按钮。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>点击这里<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>块引用 (<blockquote>) 和 引用 (<q>)：<blockquote></strong> 用于包含长引用，**<q>** 用于包含短引用。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>长引用的内容...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>正文中的文字。<span class="tag">&lt;<span class="name">q</span>&gt;</span>短引用的内容。<span class="tag">&lt;/<span class="name">q</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>标记 (<mark>)：</strong> 用于突出显示文本中的一部分。示例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一个 <span class="tag">&lt;<span class="name">mark</span>&gt;</span>突出显示<span class="tag">&lt;/<span class="name">mark</span>&gt;</span> 的文本部分。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>编辑 (<ins>, <del>)：<ins> 用于表示插入的文本，<del></strong> 用于表示删除的文本。示例</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">htmlCopy code</span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是 <span class="tag">&lt;<span class="name">ins</span>&gt;</span>插入的<span class="tag">&lt;/<span class="name">ins</span>&gt;</span> 文本和 <span class="tag">&lt;<span class="name">del</span>&gt;</span>删除的<span class="tag">&lt;/<span class="name">del</span>&gt;</span> 文本。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>多选和单选</strong> 值一样就是单选，值不一样就是多选</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312092012378.png"></p>
-<h1 id="css的配置"><a href="#css的配置" class="headerlink" title="css的配置"></a>css的配置</h1><h2 id="颜色和背景"><a href="#颜色和背景" class="headerlink" title="颜色和背景"></a>颜色和背景</h2><p>color: 设置文本颜色</p>
-<p>background-color: 设置背景颜色</p>
-<p>background-image: 设置背景图片</p>
-<p>opacity: 设置元素的透明度</p>
-<h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p>width 和 height: 设置元素的宽度和高度</p>
-<p>margin: 设置元素的外边距</p>
-<p>padding: 设置元素的内边距</p>
-<p>border: 设置元素的边框</p>
-<h2 id="布局和定位"><a href="#布局和定位" class="headerlink" title="布局和定位"></a>布局和定位</h2><p>display: 设置元素的显示方式（如 block、inline、flex 等）</p>
-<p>position: 控制元素的定位方式（如 static、relative、absolute、fixed 等）</p>
-<p>float: 允许元素在左侧或右侧浮动</p>
-<h2 id="文本排版"><a href="#文本排版" class="headerlink" title="文本排版"></a>文本排版</h2><p>font-family: 设置字体族名称</p>
-<p>font-size: 设置字体大小</p>
-<p>font-weight: 设置字体粗细</p>
-<p>text-align: 设置文本水平对齐方式</p>
-<p>line-height: 设置行高</p>
-<h2 id="装饰性样式"><a href="#装饰性样式" class="headerlink" title="装饰性样式"></a>装饰性样式</h2><p>text-decoration: 设置文本修饰（如下划线、删除线等）</p>
-<p>border-radius: 设置元素边角的圆角半径</p>
-<p>box-shadow: 添加阴影效果</p>
-<h2 id="动画和过渡"><a href="#动画和过渡" class="headerlink" title="动画和过渡"></a>动画和过渡</h2><p>animation: 设置元素的动画效果</p>
-<p>transition: 设置元素样式的过渡效果</p>
-<h2 id="响应式设计"><a href="#响应式设计" class="headerlink" title="响应式设计"></a>响应式设计</h2><p>@media: 媒体查询，根据不同的设备尺寸或特性应用不同的 CSS 样式</p>
-<h1 id="CSS-属性可以通过不同的方式在-HTML-元素中使用"><a href="#CSS-属性可以通过不同的方式在-HTML-元素中使用" class="headerlink" title="CSS 属性可以通过不同的方式在 HTML 元素中使用"></a>CSS 属性可以通过不同的方式在 HTML 元素中使用</h1><h2 id="内联样式（Inline-Styles）"><a href="#内联样式（Inline-Styles）" class="headerlink" title="内联样式（Inline Styles）:"></a>内联样式（Inline Styles）:</h2><p><strong>直接在 HTML 元素的 style 属性中设置样式。例如</strong>：</p>
-<p style="color: blue; font-size: 16px;">这是一个段落文本。</p>
-
-<h2 id="内部样式表（Internal-Styles）"><a href="#内部样式表（Internal-Styles）" class="headerlink" title="内部样式表（Internal Styles）"></a>内部样式表（Internal Styles）</h2><p><strong>在 HTML 文档的 <head> 部分使用 <style> 标签来定义样式</strong>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;style&gt;</span><br><span class="line">    p &#123;</span><br><span class="line">      color: blue;</span><br><span class="line">      font-size: 16px;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;p&gt;这是一个段落文本。&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="外部样式表（External-Styles）"><a href="#外部样式表（External-Styles）" class="headerlink" title="外部样式表（External Styles）"></a>外部样式表（External Styles）</h2><p><strong>将 CSS 样式规则保存在独立的 .css 文件中，并通过 <link> 标签将其链接到 HTML 文档</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">  color: blue;</span><br><span class="line">  font-size: 16px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>HTML 文件中的链接：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;link rel=<span class="string">&quot;stylesheet&quot;</span> href=<span class="string">&quot;styles.css&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;p&gt;这是一个段落文本。&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="以上方法中，使用-CSS-属性时需要注意以下几点"><a href="#以上方法中，使用-CSS-属性时需要注意以下几点" class="headerlink" title="以上方法中，使用 CSS 属性时需要注意以下几点:"></a>以上方法中，使用 CSS 属性时需要注意以下几点:</h2><p><strong>属性名和值之间使用冒号 : 分隔，属性值需要用分号 ; 结尾</strong></p>
-<p><strong>多个样式属性可以用分号 ; 分隔开</strong></p>
-<p><strong>在规则集中定义的选择器（如 p、.class、#id 等）决定了哪些 HTML 元素会受到这些样式的影响。</strong><br><strong>这些方法使得你可以根据需要，选择合适的方式来应用 CSS 属性，以控制 HTML 元素的外观和布局。</strong></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/10/html%E5%92%8Ccss%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
