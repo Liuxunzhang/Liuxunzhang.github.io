@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这篇介绍了php语言的用法，连接数据库，和php和MySQL的一些函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php学习">
+<meta property="og:url" content="http://zhoumuyun.com/2023/12/16/php%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Error">
+<meta property="og:description" content="这篇介绍了php语言的用法，连接数据库，和php和MySQL的一些函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162129475.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162137256.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162140049.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162141014.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162130581.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162132173.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162133374.png">
+<meta property="article:published_time" content="2023-12-16T13:23:11.000Z">
+<meta property="article:modified_time" content="2023-12-16T13:58:40.030Z">
+<meta property="article:author" content="Zhou muyun">
+<meta property="article:tag" content="PHP配置和交互">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162129475.png">
+
+<link rel="canonical" href="http://zhoumuyun.com/2023/12/16/php%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>php学习 | Error</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://Liuxunzhang/Liuxunzhang.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Error</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2023/12/16/php%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Zhou muyun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Error">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          php学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-16 21:23:11 / 修改时间：21:58:40" itemprop="dateCreated datePublished" datetime="2023-12-16T21:23:11+08:00">2023-12-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇介绍了php语言的用法，连接数据库，和php和MySQL的一些函数</p>
+<span id="more"></span>
+
+<h2 id="简单交互"><a href="#简单交互" class="headerlink" title="简单交互"></a>简单交互</h2><p>打开Apache和MySql</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162129475.png"></p>
+<p>连接数据库，打开navicat ，  文件—-&gt;新建连接—-&gt;新建连接</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162137256.png"></p>
+<p>名字可以随便取</p>
+<p>地址就填连接数据库的ip地址</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162140049.png"></p>
+<p>在数据库里面建立自己的库和表单</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162141014.png"></p>
+<p>打开网站根目录</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162130581.png"></p>
+<p>创建两个文件进行修改</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    </span><br><span class="line">&lt;form method=<span class="string">&quot;post&quot;</span>action=<span class="string">&quot;link.php&quot;</span>&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;用户名&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;&lt;br&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;密码&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;&lt;br&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=<span class="string">&quot;checkbox&quot;</span> name=<span class="string">&quot;remeber&quot;</span> value=<span class="string">&quot;yes&quot;</span>&gt;记住密码&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=<span class="string">&quot;submit&quot;</span> name=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;&lt;input type=<span class="string">&quot;reset&quot;</span> value=<span class="string">&quot;重置&quot;</span>&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;&lt;br&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;content-type:text/html;charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="comment">//isset 判断有没有值 trim 可以把字符串的所有空格去掉</span></span><br><span class="line"><span class="comment">//mysqli_connect(&quot;127.0.0.1&quot;,&quot;root&quot;,&quot;root&quot;,security) or exit(&quot;Error connecting&quot;);</span></span><br><span class="line"><span class="comment">//mysqli_query(&quot;数据库名字&quot;，&quot;执行语句 set names utf8&quot;);</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>])) &#123; <span class="comment">//数据交互</span></span><br><span class="line">    <span class="variable">$u</span> = <span class="title function_ invoke__">trim</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>]);</span><br><span class="line">    <span class="variable">$p</span> = <span class="title function_ invoke__">trim</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>]);</span><br><span class="line">    <span class="variable">$link</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;security&quot;</span>) <span class="keyword">or</span> <span class="keyword">exit</span>(<span class="string">&quot;Error connecting&quot;</span>);<span class="comment">//将这个链接赋值给link</span></span><br><span class="line">    <span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$link</span>, <span class="string">&quot;set name utf8&quot;</span>);</span><br><span class="line">    <span class="variable">$sql</span> = <span class="string">&quot;select * from users where username = &#x27;<span class="subst">$u</span>&#x27; and password = &#x27;<span class="subst">$p</span>&#x27;&quot;</span>;</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$link</span>, <span class="variable">$sql</span>); <span class="comment">//在mysql的变量$link里面执行$sql命令</span></span><br><span class="line">    <span class="variable">$row</span> = <span class="title function_ invoke__">mysqli_fetch_array</span>(<span class="variable">$result</span>); <span class="comment">//mysqli_fetch_array 接受一个结果对象作为参数，检索给定结果对象中当前行的内容，并将其作为关联数组或数值数组返回。</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$row</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;Your Login name:&#x27;</span> . <span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;Your password:&#x27;</span> . <span class="variable">$row</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;None&#x27;</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>打开网站</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162132173.png"></p>
+<p>输入账号密码，实现交互</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312162133374.png"></p>
+<h2 id="文件的简单上传"><a href="#文件的简单上传" class="headerlink" title="文件的简单上传"></a>文件的简单上传</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;</span></span><br><span class="line"><span class="string">&lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;label for=&quot;upload&quot;&gt;上传你的头像&lt;/label&gt;</span></span><br><span class="line"><span class="string">&lt;input name=&quot;file&quot; id=&quot;upload&quot; type=&quot;file&quot; &gt;</span></span><br><span class="line"><span class="string">&lt;label for=&quot;submit&quot;  &gt;文件上传&lt;/label&gt;</span></span><br><span class="line"><span class="string">&lt;input name=&quot;submit&quot; id=&quot;submit&quot; type=&quot;submit&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;h1&gt;下面是接收到的文件&lt;/h1&gt;</span></span><br><span class="line"><span class="string">&lt;/form&gt;</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Content-Type: text/html; charset=utf-8&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>]))&#123;</span><br><span class="line">    <span class="variable">$upload_dir</span> = <span class="string">&quot;uploads&quot;</span>;</span><br><span class="line">    <span class="variable">$file_name</span> = <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>];</span><br><span class="line">    <span class="variable">$file_type</span> = <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;type&quot;</span>];</span><br><span class="line">    <span class="variable">$file_size</span> = <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;size&quot;</span>];</span><br><span class="line">    <span class="variable">$file_tmp</span> = <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>];</span><br><span class="line">    <span class="variable">$target_path</span> = <span class="variable">$upload_dir</span>.<span class="string">&#x27;/&#x27;</span>.<span class="variable">$file_name</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$file_tmp</span>, <span class="variable">$target_path</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;上传成功&quot;</span>.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;文件类型: &quot;</span> . <span class="variable">$file_type</span> . <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;文件大小: &quot;</span> . (<span class="variable">$file_size</span> / <span class="number">1024</span>) . <span class="string">&quot; kB&lt;br&gt;&quot;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;文件存储的位置: &quot;</span> . <span class="variable">$target_path</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;上传失败&quot;</span>.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;img src=&#x27;./<span class="subst">$target_path</span>.&#x27;&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="php和mysli的连接一般函数"><a href="#php和mysli的连接一般函数" class="headerlink" title="php和mysli的连接一般函数"></a>php和mysli的连接一般函数</h1><p>以下是一些常见的 PHP MySQLi 函数及其参数和用法：</p>
+<ul>
+<li><p><code>mysqli_affected_rows($link)</code><br>返回上一次 MySQL 操作所影响的记录行数。<code>$link</code> 是一个 MySQL 连接。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$con</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>, <span class="string">&quot;database&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$con</span>, <span class="string">&quot;DELETE FROM table_name WHERE condition&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;受影响的行数: &quot;</span> . <span class="title function_ invoke__">mysqli_affected_rows</span>(<span class="variable">$con</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$con</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mysqli_autocommit($link, $mode)</code><br>打开或关闭自动提交数据库修改。<code>$link</code> 是一个 MySQL 连接，<code>$mode</code> 是一个布尔值，如果设置为 <code>TRUE</code>，打开自动提交；如果设置为 <code>FALSE</code>，关闭自动提交。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$con</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>, <span class="string">&quot;database&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_autocommit</span>(<span class="variable">$con</span>, <span class="literal">FALSE</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$con</span>, <span class="string">&quot;INSERT INTO table_name (column1, column2) VALUES (value1, value2)&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_commit</span>(<span class="variable">$con</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$con</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mysqli_change_user($link, $username, $password, $database)</code><br>更改指定数据库连接的用户。<code>$link</code> 是一个 MySQL 连接，<code>$username</code> 是一个字符串，表示 MySQL 用户名，<code>$password</code> 是一个字符串，表示 MySQL 密码，<code>$database</code> 是一个字符串，表示 MySQL 数据库名。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$con</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>, <span class="string">&quot;database&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_change_user</span>(<span class="variable">$con</span>, <span class="string">&quot;new_username&quot;</span>, <span class="string">&quot;new_password&quot;</span>, <span class="string">&quot;new_database&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mysqli_character_set_name($link)</code><br>返回数据库连接的默认字符集。<code>$link</code> 是一个 MySQL 连接。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$con</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>, <span class="string">&quot;database&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;默认字符集: &quot;</span> . <span class="title function_ invoke__">mysqli_character_set_name</span>(<span class="variable">$con</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$con</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mysqli_close($link)</code><br>关闭先前打开的数据库连接。<code>$link</code> 是一个 MySQL 连接。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$con</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>, <span class="string">&quot;database&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$con</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>mysqli_connect($hostname, $username, $password, $database, $port, $socket)</code><br>打开一个到 MySQL 服务器的新的连接。<code>$hostname</code> 是一个字符串，表示 MySQL 服务器的主机名，<code>$username</code> 是一个字符串，表示 MySQL 用户名，<code>$password</code> 是一个字符串，表示 MySQL 密码，<code>$database</code> 是一个字符串，表示 MySQL 数据库名，<code>$port</code> 是一个整数，表示 MySQL 服务器的端口号，<code>$socket</code> 是一个字符串，表示 MySQL 服务器的套接字或命名管道。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$con</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&quot;localhost&quot;</span>, <span class="string">&quot;username&quot;</span>, <span class="string">&quot;password&quot;</span>, <span class="string">&quot;database&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$con</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . <span class="title function_ invoke__">mysqli_connect_error</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;连接成功&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">mysqli_close</span>(<span class="variable">$con</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BA%A4%E4%BA%92/" rel="tag"># PHP配置和交互</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/10/html%E5%92%8Ccss%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="html和css的基础知识">
+      <i class="fa fa-chevron-left"></i> html和css的基础知识
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E4%BA%A4%E4%BA%92"><span class="nav-number">1.</span> <span class="nav-text">简单交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E7%AE%80%E5%8D%95%E4%B8%8A%E4%BC%A0"><span class="nav-number">2.</span> <span class="nav-text">文件的简单上传</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php%E5%92%8Cmysli%E7%9A%84%E8%BF%9E%E6%8E%A5%E4%B8%80%E8%88%AC%E5%87%BD%E6%95%B0"><span class="nav-number"></span> <span class="nav-text">php和mysli的连接一般函数</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhou muyun"
+      src="/images/avatar2.gif">
+  <p class="site-author-name" itemprop="name">Zhou muyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Liuxunzhang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Liuxunzhang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liuxunzhang1@gmail.com" title="E-Mail → mailto:liuxunzhang1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhou muyun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
