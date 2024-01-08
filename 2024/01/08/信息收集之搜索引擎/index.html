@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="此篇介绍了搜索引擎的用法，FOFA、Google、shodan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息收集之搜索引擎">
+<meta property="og:url" content="http://zhoumuyun.com/2024/01/08/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/index.html">
+<meta property="og:site_name" content="Error">
+<meta property="og:description" content="此篇介绍了搜索引擎的用法，FOFA、Google、shodan">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-08T07:49:56.000Z">
+<meta property="article:modified_time" content="2024-01-08T07:52:24.493Z">
+<meta property="article:author" content="Zhou muyun">
+<meta property="article:tag" content="信息收集">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhoumuyun.com/2024/01/08/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>信息收集之搜索引擎 | Error</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://Liuxunzhang/Liuxunzhang.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Error</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2024/01/08/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Zhou muyun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Error">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          信息收集之搜索引擎
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-08 15:49:56 / 修改时间：15:52:24" itemprop="dateCreated datePublished" datetime="2024-01-08T15:49:56+08:00">2024-01-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">渗透笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>此篇介绍了搜索引擎的用法，FOFA、Google、shodan </p>
+<span id="more"></span>
+
+<h2 id="FOFA搜索引擎"><a href="#FOFA搜索引擎" class="headerlink" title="FOFA搜索引擎"></a><a target="_blank" rel="noopener" href="https://fofa.info/">FOFA</a>搜索引擎</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>FOFA是白帽汇推出的一款网络空间搜索引擎，它通过进行网络空间测绘，能够帮助研究人员或者企业迅速进行网络资产匹配，例如进行漏洞影响范围分析、应用分布统计、应用流行排名统计等</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
+<p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
+<p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
+<p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
+<p>icon_hash&#x3D;”-247388890” 搜索使用此icon的资产。 仅限FOFA高级会员使用</p>
+<p>host&#x3D;”.gov.cn” 从url中搜索”.gov.cn” 搜索要用host作为名称</p>
+<p>port&#x3D;”6379” 查找对应“6379”端口的资产</p>
+<p>icp&#x3D;”京ICP证030173号” 查找备案号为“京ICP证030173号”的网站 搜索网站类型资产</p>
+<p>ip&#x3D;”1.1.1.1” 从ip中搜索包含“1.1.1.1”的网站 搜索要用ip作为名称</p>
+<p>ip&#x3D;”220.181.111.1&#x2F;24” 查询IP为“220.181.111.1”的C网段资产</p>
+<p>status_code&#x3D;”402” 查询服务器状态为“402”的资产</p>
+<p>protocol&#x3D;”quic” 查询quic协议资产 搜索指定协议类型(在开启端口扫描的情况下有效)</p>
+<p>country&#x3D;”CN” 搜索指定国家(编码)的资产。</p>
+<p>region&#x3D;”HeNan” 搜索指定行政区的资产。</p>
+<p>city&#x3D;”HanDan” 搜索指定城市的资产。</p>
+<p>cert&#x3D;”baidu” 搜索证书(https或者imaps等)中带有baidu的资产。</p>
+<p>cert.subject&#x3D;”Oracle Corporation” 搜索证书持有者是Oracle Corporation的资产</p>
+<p>cert.issuer&#x3D;”DigiCert” 搜索证书颁发者为DigiCert Inc的资产</p>
+<p>cert.is_valid&#x3D;true 验证证书是否有效，true有效，false无效，仅限FOFA高级会员使用</p>
+<p>banner&#x3D;users &amp;&amp; protocol&#x3D;ftp 搜索FTP协议中带有users文本的资产。</p>
+<p>type&#x3D;service 搜索所有协议资产，支持subdomain和service两种。</p>
+<p>os&#x3D;”centos” 搜索操作系统为CentOS资产。</p>
+<p>server&#x3D;&#x3D;”Microsoft-IIS&#x2F;10” 搜索IIS 10服务器。</p>
+<p>app&#x3D;”Microsoft-Exchange” 搜索Microsoft-Exchange设备</p>
+<p>after&#x3D;”2017” &amp;&amp; before&#x3D;”2017-10-01” 时间范围段搜索</p>
+<p>asn&#x3D;”19551” 搜索指定asn的资产。</p>
+<p>org&#x3D;”Amazon.com, Inc.” 搜索指定org(组织)的资产。</p>
+<p>base_protocol&#x3D;”udp” 搜索指定udp协议的资产。</p>
+<p>is_fraud&#x3D;false 排除仿冒&#x2F;欺诈数据</p>
+<p>is_honeypot&#x3D;false 排除蜜罐数据，仅限FOFA高级会员使用</p>
+<p>is_ipv6&#x3D;true 搜索ipv6的资产,只接受true和false。</p>
+<p>is_domain&#x3D;true 搜索域名的资产,只接受true和false。</p>
+<p>port_size&#x3D;”6” 查询开放端口数量等于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_gt&#x3D;”6” 查询开放端口数量大于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_lt&#x3D;”12” 查询开放端口数量小于”12”的资产，仅限FOFA会员使用</p>
+<p>ip_ports&#x3D;”80,161” 搜索同时开放80和161端口的ip资产(以ip为单位的资产数据)</p>
+<p>ip_country&#x3D;”CN” 搜索中国的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_region&#x3D;”Zhejiang” 搜索指定行政区的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_city&#x3D;”Hangzhou” 搜索指定城市的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_after&#x3D;”2021-03-18” 搜索2021-03-18以后的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_before&#x3D;”2019-09-09” 搜索2019-09-09以前的ip资产(以ip为单位的资产数据)。</p>
+<h2 id="Shodon搜索引擎"><a href="#Shodon搜索引擎" class="headerlink" title="Shodon搜索引擎"></a><a target="_blank" rel="noopener" href="https://www.shodan.io/">Shodon</a>搜索引擎</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>目前热门都认为谷歌是最强劲的搜索引擎，但Shodan 才是互联网上最可怕的搜索引擎。与谷歌不同的是， Shodan 不是在网上搜索网址，而是直接进入互联网的背后的通道。 Shodan 可以说是一款“黑暗”谷歌，一刻不停的在 寻找着所有和互联网关联的服务器、摄像头、打印机、路由器等等。还可以直接显示出目标的具体地理位置信息。</p>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><h4 id="方法1-通过Shodan搜索Webcam网络摄像头设备"><a href="#方法1-通过Shodan搜索Webcam网络摄像头设备" class="headerlink" title="方法1:通过Shodan搜索Webcam网络摄像头设备"></a>方法1:通过Shodan搜索Webcam网络摄像头设备</h4><p>在搜索框中输入 <strong>“webcam”</strong> 进行搜索。</p>
+<h4 id="方法2：Shodan搜索指定端口"><a href="#方法2：Shodan搜索指定端口" class="headerlink" title="方法2：Shodan搜索指定端口"></a>方法2：Shodan搜索指定端口</h4><ul>
+<li><p><strong>在搜索框中输入</strong>port：端口号，就可以搜索指定端口我们可以尝试一些常用端口来进行搜索</p>
+</li>
+<li><p>比如我们要搜索 80端口，就可以得到开放80端口的服务器。 也可以尝试搜索下其他常用的端口， <strong>例如：21，22，23，25，80，443，3306，3389 等</strong></p>
+</li>
+<li><p><strong>常见端口：</strong></p>
+</li>
+<li><ul>
+<li><strong>21 号端口：</strong>文件传输协议 - 控制端口</li>
+<li><strong>22 号端口：</strong>SSH（Secure Shell）- 远程登录协议</li>
+<li><strong>23 号端口****：</strong>Telnet 终端仿真协议 - 未加密文本通信</li>
+<li><strong>25 号端口：</strong>SMTP（简单邮件传输协议）</li>
+<li><strong>80 号端口：</strong>超文本传输协议 - 用于传输网页</li>
+<li><strong>443 号端口：</strong>超文本传输安全协议 - 超文本传输协议 over TLS&#x2F;SSL（加密传输）</li>
+<li><strong>445 号端口：</strong>SMB 文件共享</li>
+<li><strong>3306 号端口：</strong>MySQL 数据库系统</li>
+<li><strong>3389 号端口：</strong>远程桌面协议（RDP）</li>
+</ul>
+</li>
+<li><p><strong>常见的过滤命令</strong></p>
+</li>
+<li><ul>
+<li><strong>hostname：</strong>搜索指定的主机或域名，例如hostname:”google”</li>
+<li><strong>port：</strong>搜索指定的端口或服务，例如port:”21”</li>
+<li><strong>country</strong>：搜索指定的国家，例如country:”CN”</li>
+<li><strong>city：</strong>搜索指定的城市，例如city:”Hefei”</li>
+<li><strong>org：</strong>搜索指定的组织或公司，例如org:”google”**</li>
+<li><strong>isp：</strong>搜索指定的ISP供应商，例如isp:”China Telecom”**</li>
+<li><strong>product：</strong>搜索指定的操作系统&#x2F;软件&#x2F;平台，例如product:”Apache httpd”**</li>
+<li><strong>version：</strong>搜索指定的软件版本，例如version:”1.6.2”**</li>
+<li><strong>geo：</strong>搜索指定的地理位置，例如geo:”31.8639,117.2808”**</li>
+<li><strong>before&#x2F;after：</strong>搜索指定收录时间前后的数据，格式为 dd-mm-yy，例如before:”11-11-15”</li>
+<li><strong>net：</strong>搜索指定的 IP地址或子网，例如net:”210.45.240.0&#x2F;24”</li>
+</ul>
+</li>
+</ul>
+<h2 id="Google搜索引擎"><a href="#Google搜索引擎" class="headerlink" title="Google搜索引擎"></a><a target="_blank" rel="noopener" href="https://www.google.com/">Google</a>搜索引擎</h2><h3 id="基本关键字"><a href="#基本关键字" class="headerlink" title="基本关键字"></a>基本关键字</h3><table>
+<thead>
+<tr>
+<th><strong>算</strong>  <strong>符</strong></th>
+<th><strong>含</strong>    <strong>义</strong></th>
+<th><strong>应用举例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AND&#x2F;空格</td>
+<td>所连接的关键词之间是“与”的关系;</td>
+<td>云计算 分布式计算</td>
+</tr>
+<tr>
+<td>OR&#x2F;|</td>
+<td>所连接的关键词之间是“或”的关系</td>
+<td>图片 | 写真</td>
+</tr>
+<tr>
+<td>-</td>
+<td>所连接的关键词之间是“非”的关系</td>
+<td>神雕侠侣 -游戏</td>
+</tr>
+<tr>
+<td>（）</td>
+<td>在检索式中括号里的运算将优先进行</td>
+<td>电子商务 AND  (云计算 -分布式计算)</td>
+</tr>
+<tr>
+<td>“”</td>
+<td>“”英文双引号中的内容作为一个整体被搜索; 精确匹配搜索</td>
+<td>“智能天线”</td>
+</tr>
+<tr>
+<td>*</td>
+<td>通配符-星号*，代表完整的字词; A * B、A * * B这两个是有区别的</td>
+<td>Flower  * pots &#x2F;Flower * * pots</td>
+</tr>
+<tr>
+<td>+</td>
+<td>强制搜索一般会被自动忽略的搜索关键词，如：who、the、of、am</td>
+<td>+B</td>
+</tr>
+<tr>
+<td>~</td>
+<td>同义符;在搜索词前使用，表示会和同时搜索相近词义的词;示例中会同搜元素Si</td>
+<td>~  silicon</td>
+</tr>
+<tr>
+<td>..</td>
+<td>搜索数字范围限定</td>
+<td>手机价格2000..5000</td>
+</tr>
+<tr>
+<td>filetype:</td>
+<td>把搜索范围限定在特定文件类型中; .pdf&#x2F;.doc&#x2F;.docx&#x2F;.ppt&#x2F;.pptx&#x2F;.xls&#x2F;.xlsx&#x2F;.rtf&#x2F;.txt&#x2F;.swf&#x2F;.ps</td>
+<td>霍金 黑洞filetype:pdf</td>
+</tr>
+<tr>
+<td>site：</td>
+<td>把搜索范围限定在特定站点、某一站点特定频道、特定域名后缀中</td>
+<td>科技 site:news.163.com</td>
+</tr>
+<tr>
+<td>inurl:</td>
+<td>把搜索范围限定在url链接中</td>
+<td>inurl:jiqiao  photoshop</td>
+</tr>
+<tr>
+<td>allinurl:</td>
+<td>把搜索范围限定在url链接中, 只不过其后所有关键词均要在url链接中出现</td>
+<td>allinurl:jiqiao  photoshop</td>
+</tr>
+<tr>
+<td>intitle</td>
+<td>把搜索范围限定在网页标题中</td>
+<td>商业 intitle:超级女声</td>
+</tr>
+<tr>
+<td>allintitle:</td>
+<td>把搜索范围限定在网页标题中; 只不过其后所有关键词均要在网页标题中出现</td>
+<td>allintitle:超级女声 张靓颖</td>
+</tr>
+<tr>
+<td>intext:</td>
+<td>把搜索范围限定在网页正文中; 忽略超链接文本、URL以及题目等</td>
+<td></td>
+</tr>
+<tr>
+<td>inanchor:</td>
+<td>把搜索范围限定在链接锚文本文字中</td>
+<td>inanchor:吴清源</td>
+</tr>
+<tr>
+<td>anchor:</td>
+<td>检索某一作者&#x2F;发明人的论著; 只在Google Scholar中可用</td>
+<td>anchor:&#x2F;作者:</td>
+</tr>
+<tr>
+<td>link：</td>
+<td>检索所有链接到某个特定URL网址的网页;只能单独使用</td>
+<td>link:163.com</td>
+</tr>
+<tr>
+<td>cache:</td>
+<td>Google网页快照</td>
+<td></td>
+</tr>
+<tr>
+<td>related：</td>
+<td>检索与某特定网页类似的网页</td>
+<td>related:<a target="_blank" rel="noopener" href="http://www.163.com/index.shtml">www.163.com/index.shtml</a></td>
+</tr>
+<tr>
+<td>info:</td>
+<td>用来显示与某链接相关的一系列搜索; 提供cache、similar-pages、link、related等连接</td>
+<td>info:<a target="_blank" rel="noopener" href="http://www.sina.com.cn/">www.sina.com.cn</a></td>
+</tr>
+<tr>
+<td>Index  of</td>
+<td>可以帮助你寻找网络和FTP目录</td>
+<td>index  of mp3</td>
+</tr>
+<tr>
+<td>daterange:</td>
+<td>查找在一定的日期或者一定的日期范围内; 只关注被Google收录的时间</td>
+<td></td>
+</tr>
+<tr>
+<td>location:</td>
+<td>指定地区区域内查询关键词相关的网页</td>
+<td>wow  gold location:France</td>
+</tr>
+<tr>
+<td>weather:</td>
+<td>查询该地区或城市当前的天气状况</td>
+<td>weather:北京</td>
+</tr>
+<tr>
+<td>stocks:</td>
+<td>查询股票信息; 一般源于专业财经网站</td>
+<td>stocks:比亚迪</td>
+</tr>
+<tr>
+<td>define:</td>
+<td>返回包含查询关键词定义的网面</td>
+<td>define:  暗网</td>
+</tr>
+<tr>
+<td>注意:关键词与命令之间有一个空格;在这些关键字中;请勿在冒号后面接空格;命令需用英文输入,包括冒号。AND、OR、NOT均应大写,而其他算符必须是小写，虽其对检索词完全不区分大小写</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><ul>
+<li><strong>Google</strong> 是当今世界上最强大的搜索引擎，也是黑客手中的一个秘密武器。 <strong>GoogleHack 就是利用Google 搜索引擎来辅助进行渗透测试的。</strong> Google 在 SecTools 排行榜上排名第 26 位。</li>
+<li><strong>Google</strong> 直接搜索自己想要的内容，正常情况下我们都是直接用语言进行描述问题来进行搜索，然后搜索引擎也有特定的语法可以使用，熟练掌握搜索引擎的语法可以让你的搜索效率和准确率大幅度提升， <strong>当然我们学习这种技巧是为了寻找存在漏洞的页面，或者存在敏感信息的文件</strong></li>
+</ul>
+<h3 id="常见的Google关键字"><a href="#常见的Google关键字" class="headerlink" title="常见的Google关键字"></a>常见的Google关键字</h3><ul>
+<li><strong>site：</strong>指定域名</li>
+<li><strong>inurl：</strong>URL中存在的关键字页面</li>
+<li><strong>intext：</strong>网页内容里面的关键字</li>
+<li><strong>Filetype：</strong>指定文件类型</li>
+<li><strong>intitle：</strong>网页标题中的关键字</li>
+<li><strong>link：</strong>返回你所有的指定域名链接</li>
+<li><strong>info：</strong>查找指定站点信息</li>
+<li><strong>cache：</strong>搜索 Google 里的内容缓存</li>
+<li><strong>-关键字</strong>：不希望搜索结果中出现包含该关键字的网页</li>
+</ul>
+<h3 id="技巧-1"><a href="#技巧-1" class="headerlink" title="技巧"></a>技巧</h3><h4 id="技巧1：搜注入点"><a href="#技巧1：搜注入点" class="headerlink" title="技巧1：搜注入点"></a>技巧1：搜注入点</h4><p>inurl:搜索URL中包含指定关键字的网页</p>
+<p>输入内容：inurl:php?id&#x3D;或者inurl:asp?id&#x3D;</p>
+<h4 id="技巧2：搜后台登录界面什么的"><a href="#技巧2：搜后台登录界面什么的" class="headerlink" title="技巧2：搜后台登录界面什么的"></a>技巧2：搜后台登录界面什么的</h4><p>inurl:login|admin|manage|manager|admin_login|login_admin|system|boss|master</p>
+<h4 id="技巧3：搜索敏感信息"><a href="#技巧3：搜索敏感信息" class="headerlink" title="技巧3：搜索敏感信息"></a>技巧3：搜索敏感信息</h4><p>intitle:搜索标题种种函数关键字的网页</p>
+<p>intitle:管理|登录|后台；搜索标题含有“管理”、“登录”、“后台”的网页</p>
+<p>filetype:xls 身份证  搜索含有身份证的xls文件</p>
+<h4 id="技巧4：搜索敏感页面"><a href="#技巧4：搜索敏感页面" class="headerlink" title="技巧4：搜索敏感页面"></a>技巧4：搜索敏感页面</h4><p>site:xxx.com inurl:file</p>
+<p>site:xxx.com inurl:load</p>
+<h4 id="技巧5：搜索重要文件"><a href="#技巧5：搜索重要文件" class="headerlink" title="技巧5：搜索重要文件"></a>技巧5：搜索重要文件</h4><p>例如：robots.txt告知搜索引擎，网站中那些目录不希望被蜘蛛爬到</p>
+<p>site:xxx.com inull:robots.txt</p>
+<p>site:xxx.com inurl:txt</p>
+<h4 id="技巧6：-”kali-filetype-torrent”"><a href="#技巧6：-”kali-filetype-torrent”" class="headerlink" title="技巧6：**”kali filetype:torrent”**"></a>技巧6：**”kali filetype:torrent”**</h4><p>kali是我们要搜索的关键字</p>
+<p>filetype指点文件类型</p>
+<p>torrent文件类型名称，torrent是种子文件，可以填写任意扩展名</p>
+<p>site:xxx.com filetype:mdb</p>
+<p>site:xxx.com filetype:ini</p>
+<h4 id="技巧7：-”intext-user-sql-intitle-index-of”-组合使用技巧"><a href="#技巧7：-”intext-user-sql-intitle-index-of”-组合使用技巧" class="headerlink" title="技巧7：**”intext:user.sql intitle:index.of” 组合使用技巧**"></a>技巧7：**”intext:user.sql intitle:index.of” 组合使用技巧**</h4><p>intext:user.sql查询包含 user.sql 用户数据库信息的页面</p>
+<p>intitle:index.of表示网站目录是开放状态</p>
+<h4 id="技巧8：查看同类网站"><a href="#技巧8：查看同类网站" class="headerlink" title="技巧8：查看同类网站"></a>技巧8：查看同类网站</h4><p><strong>related:<strong>将返回相似的页面，相似指的是网页的</strong>布局相似</strong>；</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/%22http://www.sxu.edu.cn%22">www.sxu.edu.cn</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/%22http://www.llhc.edu.cn%22">www.llhc.edu.cn</a></p>
+<h4 id="技巧9：查看服务器使用的程序"><a href="#技巧9：查看服务器使用的程序" class="headerlink" title="技巧9：查看服务器使用的程序"></a>技巧9：查看服务器使用的程序</h4><p>site:xxx.com filetype:asp</p>
+<p>site:xxx.com filetype:php</p>
+<p>site:xxx.com filetype:jsp</p>
+<p>site:xxx.com filetype:aspx</p>
+<p>判断网站用了说明编程语言</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag"># 信息收集</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/07/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="prev" title="信息收集">
+      <i class="fa fa-chevron-left"></i> 信息收集
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FOFA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">1.</span> <span class="nav-text">FOFA搜索引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.2.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shodon%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">2.</span> <span class="nav-text">Shodon搜索引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E5%B7%A7"><span class="nav-number">2.2.</span> <span class="nav-text">技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%951-%E9%80%9A%E8%BF%87Shodan%E6%90%9C%E7%B4%A2Webcam%E7%BD%91%E7%BB%9C%E6%91%84%E5%83%8F%E5%A4%B4%E8%AE%BE%E5%A4%87"><span class="nav-number">2.2.1.</span> <span class="nav-text">方法1:通过Shodan搜索Webcam网络摄像头设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9AShodan%E6%90%9C%E7%B4%A2%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.2.2.</span> <span class="nav-text">方法2：Shodan搜索指定端口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="nav-number">3.</span> <span class="nav-text">Google搜索引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">3.1.</span> <span class="nav-text">基本关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D-1"><span class="nav-number">3.2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84Google%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">3.3.</span> <span class="nav-text">常见的Google关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E5%B7%A7-1"><span class="nav-number">3.4.</span> <span class="nav-text">技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A71%EF%BC%9A%E6%90%9C%E6%B3%A8%E5%85%A5%E7%82%B9"><span class="nav-number">3.4.1.</span> <span class="nav-text">技巧1：搜注入点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A72%EF%BC%9A%E6%90%9C%E5%90%8E%E5%8F%B0%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2%E4%BB%80%E4%B9%88%E7%9A%84"><span class="nav-number">3.4.2.</span> <span class="nav-text">技巧2：搜后台登录界面什么的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A73%EF%BC%9A%E6%90%9C%E7%B4%A2%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF"><span class="nav-number">3.4.3.</span> <span class="nav-text">技巧3：搜索敏感信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A74%EF%BC%9A%E6%90%9C%E7%B4%A2%E6%95%8F%E6%84%9F%E9%A1%B5%E9%9D%A2"><span class="nav-number">3.4.4.</span> <span class="nav-text">技巧4：搜索敏感页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A75%EF%BC%9A%E6%90%9C%E7%B4%A2%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">3.4.5.</span> <span class="nav-text">技巧5：搜索重要文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A76%EF%BC%9A-%E2%80%9Dkali-filetype-torrent%E2%80%9D"><span class="nav-number">3.4.6.</span> <span class="nav-text">技巧6：**”kali filetype:torrent”**</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A77%EF%BC%9A-%E2%80%9Dintext-user-sql-intitle-index-of%E2%80%9D-%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">3.4.7.</span> <span class="nav-text">技巧7：**”intext:user.sql intitle:index.of” 组合使用技巧**</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A78%EF%BC%9A%E6%9F%A5%E7%9C%8B%E5%90%8C%E7%B1%BB%E7%BD%91%E7%AB%99"><span class="nav-number">3.4.8.</span> <span class="nav-text">技巧8：查看同类网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E5%B7%A79%EF%BC%9A%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.4.9.</span> <span class="nav-text">技巧9：查看服务器使用的程序</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhou muyun"
+      src="/images/avatar2.gif">
+  <p class="site-author-name" itemprop="name">Zhou muyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Liuxunzhang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Liuxunzhang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liuxunzhang1@gmail.com" title="E-Mail → mailto:liuxunzhang1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhou muyun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
