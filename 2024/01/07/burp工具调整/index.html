@@ -20,15 +20,18 @@
     var CONFIG = {"hostname":"zhoumuyun.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="burpsuite的调教">
+  <meta name="description" content="burpsuite光标偏移，浏览器代理，上游代理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="burp工具调整">
 <meta property="og:url" content="http://zhoumuyun.com/2024/01/07/burp%E5%B7%A5%E5%85%B7%E8%B0%83%E6%95%B4/index.html">
 <meta property="og:site_name" content="Error">
-<meta property="og:description" content="burpsuite的调教">
+<meta property="og:description" content="burpsuite光标偏移，浏览器代理，上游代理">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072012343.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013264.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132103457.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132104858.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132105972.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013654.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013708.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013388.png">
@@ -45,7 +48,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072014808.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072015892.png">
 <meta property="article:published_time" content="2024-01-07T12:11:23.000Z">
-<meta property="article:modified_time" content="2024-01-07T12:19:31.863Z">
+<meta property="article:modified_time" content="2024-01-13T13:05:14.487Z">
 <meta property="article:author" content="Zhou muyun">
 <meta property="article:tag" content="工具介绍">
 <meta name="twitter:card" content="summary">
@@ -202,10 +205,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-07 20:11:23 / 修改时间：20:19:31" itemprop="dateCreated datePublished" datetime="2024-01-07T20:11:23+08:00">2024-01-07</time>
+              <time title="创建时间：2024-01-07 20:11:23" itemprop="dateCreated datePublished" datetime="2024-01-07T20:11:23+08:00">2024-01-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-13 21:05:14" itemprop="dateModified" datetime="2024-01-13T21:05:14+08:00">2024-01-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -227,11 +236,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>burpsuite的调教</p>
+        <p>burpsuite光标偏移，浏览器代理，上游代理</p>
 <span id="more"></span>
 
 <h2 id="解决burpsuite光标偏移"><a href="#解决burpsuite光标偏移" class="headerlink" title="解决burpsuite光标偏移"></a>解决burpsuite光标偏移</h2><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072012343.png"></p>
 <p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013264.png"></p>
+<h2 id="代理流量走向"><a href="#代理流量走向" class="headerlink" title="代理流量走向"></a>代理流量走向</h2><h3 id="直接代理"><a href="#直接代理" class="headerlink" title="直接代理"></a>直接代理</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132103457.png"></p>
+<h3 id="二级代理"><a href="#二级代理" class="headerlink" title="二级代理"></a>二级代理</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132104858.png"></p>
+<h3 id="没有代理的软件"><a href="#没有代理的软件" class="headerlink" title="没有代理的软件"></a>没有代理的软件</h3><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401132105972.png"></p>
 <h2 id="burp捕捉google浏览器的包"><a href="#burp捕捉google浏览器的包" class="headerlink" title="burp捕捉google浏览器的包"></a>burp捕捉google浏览器的包</h2><p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013654.png"></p>
 <p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013708.png"></p>
 <p><img src="https://raw.githubusercontent.com/Liuxunzhang/tuchuang/main/lxz/202401072013388.png"></p>
@@ -338,7 +350,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3burpsuite%E5%85%89%E6%A0%87%E5%81%8F%E7%A7%BB"><span class="nav-number">1.</span> <span class="nav-text">解决burpsuite光标偏移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#burp%E6%8D%95%E6%8D%89google%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">burp捕捉google浏览器的包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%93%E9%9C%80%E8%A6%81%E5%9B%BD%E5%A4%96%E4%BB%A3%E7%90%86%E7%9A%84%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">抓需要国外代理的包</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3burpsuite%E5%85%89%E6%A0%87%E5%81%8F%E7%A7%BB"><span class="nav-number">1.</span> <span class="nav-text">解决burpsuite光标偏移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%B5%81%E9%87%8F%E8%B5%B0%E5%90%91"><span class="nav-number">2.</span> <span class="nav-text">代理流量走向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">直接代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E4%BB%A3%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">二级代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E4%BB%A3%E7%90%86%E7%9A%84%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">没有代理的软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#burp%E6%8D%95%E6%8D%89google%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">burp捕捉google浏览器的包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%93%E9%9C%80%E8%A6%81%E5%9B%BD%E5%A4%96%E4%BB%A3%E7%90%86%E7%9A%84%E5%8C%85"><span class="nav-number">4.</span> <span class="nav-text">抓需要国外代理的包</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -354,7 +366,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -367,7 +379,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
